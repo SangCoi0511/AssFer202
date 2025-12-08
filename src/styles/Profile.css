@@ -1,0 +1,170 @@
+.profile-page {
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 70vh;
+}
+
+.profile-container h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 2.5rem;
+}
+
+.profile-info {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.profile-info h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #1a1a1a;
+}
+
+.info-item {
+  display: flex;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 0.9375rem;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-item strong {
+  min-width: 120px;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.info-item span {
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+.orders-section {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+.orders-section h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #1a1a1a;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.order-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: none;
+}
+
+.order-card:hover {
+  border-color: #d1d5db;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.order-id {
+  font-weight: 700;
+  color: #1a1a1a;
+  font-size: 1rem;
+}
+
+.order-date {
+  color: #6b7280;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.order-status {
+  margin-bottom: 0.75rem;
+  font-size: 0.9375rem;
+  color: #6b7280;
+}
+
+.order-status span {
+  font-weight: 600;
+  text-transform: capitalize;
+  margin-left: 0.25rem;
+}
+
+.order-status span.pending {
+  color: #f59e0b;
+}
+
+.order-status span.completed {
+  color: #059669;
+}
+
+.order-status span.cancelled {
+  color: #dc2626;
+}
+
+.order-total {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.no-orders {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-page {
+    padding: 2rem 1rem;
+  }
+
+  .profile-info,
+  .orders-section {
+    padding: 1.5rem;
+  }
+
+  .info-item {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .info-item strong {
+    min-width: auto;
+  }
+
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}

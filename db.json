@@ -1,0 +1,486 @@
+{
+  "categories": [
+    {
+      "id": "1",
+      "name": "Electronics",
+      "slug": "electronics"
+    },
+    {
+      "id": "2",
+      "name": "Fashion",
+      "slug": "fashion"
+    },
+    {
+      "id": "3",
+      "name": "Home & Kitchen",
+      "slug": "home-kitchen"
+    },
+    {
+      "id": "4",
+      "name": "Sports",
+      "slug": "sports"
+    },
+    {
+      "id": "5",
+      "name": "Toys",
+      "slug": "toys"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Wireless Bluetooth Headphones",
+      "price": 59.99,
+      "categoryId": 1,
+      "stock": 25,
+      "rating": 4.5,
+      "image": "https://picsum.photos/500?image=101",
+      "description": "Noise-cancelling wireless headphones with 20-hour battery."
+    },
+    {
+      "id": "2",
+      "name": "Smartwatch Pro Series",
+      "price": 129.99,
+      "categoryId": 1,
+      "stock": 14,
+      "rating": 4.8,
+      "image": "https://picsum.photos/500?image=102",
+      "description": "GPS, AMOLED display, health tracking, durable build."
+    },
+    {
+      "id": "3",
+      "name": "USB-C Fast Charger 30W",
+      "price": 19.99,
+      "categoryId": 1,
+      "stock": 100,
+      "rating": 4.4,
+      "image": "https://picsum.photos/500?image=103",
+      "description": "Fast charging with overheat protection."
+    },
+    {
+      "id": "4",
+      "name": "Portable Bluetooth Speaker",
+      "price": 39.99,
+      "categoryId": 1,
+      "stock": 30,
+      "rating": 4.2,
+      "image": "https://picsum.photos/500?image=104",
+      "description": "Water-resistant outdoor speaker with deep bass."
+    },
+    {
+      "id": "5",
+      "name": "4K LED Monitor 27-inch",
+      "price": 299.99,
+      "categoryId": 1,
+      "stock": 10,
+      "rating": 4.7,
+      "image": "https://picsum.photos/500?image=105",
+      "description": "Crisp 4K display with HDR and 144Hz refresh rate."
+    },
+    {
+      "id": "6",
+      "name": "Men’s Casual Sneakers",
+      "price": 39.99,
+      "categoryId": 2,
+      "stock": 32,
+      "rating": 4.2,
+      "image": "https://picsum.photos/500?image=106",
+      "description": "Lightweight sneakers perfect for everyday wear."
+    },
+    {
+      "id": "7",
+      "name": "Women's Summer Dress Floral",
+      "price": 29.99,
+      "categoryId": 2,
+      "stock": 18,
+      "rating": 4.3,
+      "image": "https://picsum.photos/500?image=107",
+      "description": "Floral cotton dress ideal for summer outings."
+    },
+    {
+      "id": "8",
+      "name": "Men's Leather Jacket",
+      "price": 89.99,
+      "categoryId": 2,
+      "stock": 12,
+      "rating": 4.6,
+      "image": "https://picsum.photos/500?image=108",
+      "description": "Premium leather jacket for casual and formal wear."
+    },
+    {
+      "id": "9",
+      "name": "Women's Running Shoes",
+      "price": 49.99,
+      "categoryId": 2,
+      "stock": 40,
+      "rating": 4.4,
+      "image": "https://picsum.photos/500?image=109",
+      "description": "Comfortable running shoes with breathable mesh."
+    },
+    {
+      "id": "10",
+      "name": "Men's Hoodie Premium",
+      "price": 34.99,
+      "categoryId": 2,
+      "stock": 28,
+      "rating": 4.5,
+      "image": "https://picsum.photos/500?image=110",
+      "description": "Soft fleece hoodie suitable for chilly weather."
+    },
+    {
+      "id": "11",
+      "name": "Non-stick Cookware Set (10 pcs)",
+      "price": 89.99,
+      "categoryId": 3,
+      "stock": 12,
+      "rating": 4.6,
+      "image": "https://picsum.photos/500?image=111",
+      "description": "Durable cookware with non-stick coating."
+    },
+    {
+      "id": "12",
+      "name": "Electric Kettle 1.8L",
+      "price": 24.99,
+      "categoryId": 3,
+      "stock": 45,
+      "rating": 4.1,
+      "image": "https://picsum.photos/500?image=112",
+      "description": "Boil water fast with auto shut-off protection."
+    },
+    {
+      "id": "13",
+      "name": "Air Fryer 5.5L XL",
+      "price": 129.99,
+      "categoryId": 3,
+      "stock": 15,
+      "rating": 4.7,
+      "image": "https://picsum.photos/500?image=113",
+      "description": "Healthy cooking with rapid air technology."
+    },
+    {
+      "id": "14",
+      "name": "Stainless Steel Knife Set",
+      "price": 59.99,
+      "categoryId": 3,
+      "stock": 25,
+      "rating": 4.5,
+      "image": "https://picsum.photos/500?image=114",
+      "description": "Professional-grade kitchen knife set."
+    },
+    {
+      "id": "15",
+      "name": "Vacuum Cleaner Pro",
+      "price": 199.99,
+      "categoryId": 3,
+      "stock": 8,
+      "rating": 4.8,
+      "image": "https://picsum.photos/500?image=115",
+      "description": "Powerful suction for all surfaces."
+    },
+    {
+      "id": "16",
+      "name": "Professional Basketball",
+      "price": 24.99,
+      "categoryId": 4,
+      "stock": 40,
+      "rating": 4.4,
+      "image": "https://picsum.photos/500?image=116",
+      "description": "Durable basketball for indoor and outdoor use."
+    },
+    {
+      "id": "17",
+      "name": "Football Training Set",
+      "price": 34.99,
+      "categoryId": 4,
+      "stock": 22,
+      "rating": 4.3,
+      "image": "https://picsum.photos/500?image=117",
+      "description": "Full football training set for beginners."
+    },
+    {
+      "id": "18",
+      "name": "Yoga Mat Anti-Slip",
+      "price": 19.99,
+      "categoryId": 4,
+      "stock": 50,
+      "rating": 4.7,
+      "image": "https://picsum.photos/500?image=118",
+      "description": "High-density mat with anti-slip texture."
+    },
+    {
+      "id": "19",
+      "name": "Adjustable Dumbbells (Pair)",
+      "price": 79.99,
+      "categoryId": 4,
+      "stock": 16,
+      "rating": 4.8,
+      "image": "https://picsum.photos/500?image=119",
+      "description": "Adjustable weights for full-body workouts."
+    },
+    {
+      "id": "20",
+      "name": "Cycling Helmet Pro",
+      "price": 49.99,
+      "categoryId": 4,
+      "stock": 14,
+      "rating": 4.5,
+      "image": "https://picsum.photos/500?image=120",
+      "description": "Lightweight helmet with shock-absorbing layer."
+    },
+    {
+      "id": "21",
+      "name": "Remote Control Car",
+      "price": 34.99,
+      "categoryId": 5,
+      "stock": 22,
+      "rating": 4.1,
+      "image": "https://picsum.photos/500?image=121",
+      "description": "Rechargeable high-speed RC car."
+    },
+    {
+      "id": "22",
+      "name": "Building Blocks 120 pcs",
+      "price": 19.99,
+      "categoryId": 5,
+      "stock": 45,
+      "rating": 4.5,
+      "image": "https://picsum.photos/500?image=122",
+      "description": "Colorful creative building blocks."
+    },
+    {
+      "id": "23",
+      "name": "Stuffed Animal Bear",
+      "price": 14.99,
+      "categoryId": 5,
+      "stock": 60,
+      "rating": 4.4,
+      "image": "https://picsum.photos/500?image=123",
+      "description": "Soft plush bear toy for kids."
+    },
+    {
+      "id": "24",
+      "name": "Toy Kitchen Playset",
+      "price": 49.99,
+      "categoryId": 5,
+      "stock": 20,
+      "rating": 4.6,
+      "image": "https://picsum.photos/500?image=124",
+      "description": "Miniature kitchen playset for children."
+    },
+    {
+      "id": "25",
+      "name": "Puzzle 1000 Pieces",
+      "price": 12.99,
+      "categoryId": 5,
+      "stock": 80,
+      "rating": 4.3,
+      "image": "https://picsum.photos/500?image=125",
+      "description": "Challenging puzzle game for all ages."
+    },
+    {
+      "id": "26",
+      "name": "Tablet 10-inch HD",
+      "price": 149.99,
+      "categoryId": 1,
+      "stock": 18,
+      "rating": 4.6,
+      "image": "https://picsum.photos/500?image=126",
+      "description": "HD display, long battery, fast performance."
+    },
+    {
+      "id": "27",
+      "name": "Gaming Keyboard RGB",
+      "price": 49.99,
+      "categoryId": 1,
+      "stock": 30,
+      "rating": 4.7,
+      "image": "https://picsum.photos/500?image=127",
+      "description": "Mechanical keyboard with RGB lighting modes."
+    },
+    {
+      "id": "28",
+      "name": "Noise Cancelling Microphone",
+      "price": 79.99,
+      "categoryId": 1,
+      "stock": 14,
+      "rating": 4.6,
+      "image": "https://picsum.photos/500?image=128",
+      "description": "Professional microphone for streaming."
+    },
+    {
+      "id": "29",
+      "name": "Power Bank 20000mAh",
+      "price": 29.99,
+      "categoryId": 1,
+      "stock": 50,
+      "rating": 4.4,
+      "image": "https://picsum.photos/500?image=129",
+      "description": "Fast charging, dual output."
+    },
+    {
+      "id": "30",
+      "name": "LED Desk Lamp",
+      "price": 22.99,
+      "categoryId": 1,
+      "stock": 40,
+      "rating": 4.2,
+      "image": "https://picsum.photos/500?image=130",
+      "description": "Adjustable brightness and eye protection."
+    },
+    {
+      "id": "31",
+      "name": "Men's Polo Shirt",
+      "price": 24.99,
+      "categoryId": 2,
+      "stock": 35,
+      "rating": 4.1,
+      "image": "https://picsum.photos/500?image=131",
+      "description": "Soft cotton polo shirt in multiple colors."
+    },
+    {
+      "id": "32",
+      "name": "Women's Handbag Leather",
+      "price": 69.99,
+      "categoryId": 2,
+      "stock": 16,
+      "rating": 4.8,
+      "image": "https://picsum.photos/500?image=132",
+      "description": "Elegant handbag with high-quality stitching."
+    },
+    {
+      "id": "33",
+      "name": "Unisex Sunglasses UV400",
+      "price": 14.99,
+      "categoryId": 2,
+      "stock": 70,
+      "rating": 4.2,
+      "image": "https://picsum.photos/500?image=133",
+      "description": "UV protection with stylish frame."
+    },
+    {
+      "id": "34",
+      "name": "Men's Formal Shirt",
+      "price": 29.99,
+      "categoryId": 2,
+      "stock": 25,
+      "rating": 4.3,
+      "image": "https://picsum.photos/500?image=134",
+      "description": "Premium fabric, perfect for office wear."
+    },
+    {
+      "id": "35",
+      "name": "Women's Winter Coat",
+      "price": 119.99,
+      "categoryId": 2,
+      "stock": 10,
+      "rating": 4.9,
+      "image": "https://picsum.photos/500?image=135",
+      "description": "Warm winter coat with fur lining."
+    },
+    {
+      "id": "36",
+      "name": "Rice Cooker 1.5L",
+      "price": 49.99,
+      "categoryId": 3,
+      "stock": 34,
+      "rating": 4.4,
+      "image": "https://picsum.photos/500?image=136",
+      "description": "Non-stick inner pot with timer."
+    },
+    {
+      "id": "37",
+      "name": "Blender 600W",
+      "price": 39.99,
+      "categoryId": 3,
+      "stock": 28,
+      "rating": 4.1,
+      "image": "https://picsum.photos/500?image=137",
+      "description": "Strong motor and 3-speed settings."
+    },
+    {
+      "id": "38",
+      "name": "Ceramic Dinnerware Set",
+      "price": 79.99,
+      "categoryId": 3,
+      "stock": 20,
+      "rating": 4.7,
+      "image": "https://picsum.photos/500?image=138",
+      "description": "16-piece ceramic dinnerware, elegant design."
+    },
+    {
+      "id": "39",
+      "name": "Robot Vacuum Mini",
+      "price": 149.99,
+      "categoryId": 3,
+      "stock": 12,
+      "rating": 4.6,
+      "image": "https://picsum.photos/500?image=139",
+      "description": "Smart cleaning with auto navigation."
+    },
+    {
+      "id": "40",
+      "name": "Electric Grill 2-in-1",
+      "price": 59.99,
+      "categoryId": 3,
+      "stock": 18,
+      "rating": 4.3,
+      "image": "https://picsum.photos/500?image=140",
+      "description": "Indoor grill and hotpot combined."
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "Admin User",
+      "email": "admin@shop.com",
+      "password": "admin123",
+      "role": "admin",
+      "address": "123 Admin Street"
+    },
+    {
+      "id": "2",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "password": "user123",
+      "role": "user",
+      "address": "456 User Avenue"
+    }
+  ],
+  "wishlist": [
+    {
+      "id": "2a47",
+      "userId": 1764674989332,
+      "productId": 1
+    },
+    {
+      "id": "5aa9",
+      "userId": 1764674989332,
+      "productId": "8"
+    },
+    {
+      "id": "8437",
+      "userId": 1764674989332,
+      "productId": 1
+    }
+  ],
+  "reviews": [
+    {
+      "id": "f029",
+      "productId": 1,
+      "userId": 1764674989332,
+      "rating": 3,
+      "comment": "Oke",
+      "date": "2025-12-02T11:33:51.697Z"
+    },
+    {
+      "id": "673d",
+      "productId": 1,
+      "userId": 1764674989332,
+      "rating": 5,
+      "comment": "vv",
+      "date": "2025-12-02T13:00:59.030Z"
+    }
+  ],
+  "cart": [],
+  "orders": []
+}
