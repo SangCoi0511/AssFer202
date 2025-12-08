@@ -29,403 +29,753 @@
   "products": [
     {
       "id": "1",
-      "name": "Wireless Bluetooth Headphones",
-      "price": 59.99,
+      "name": "iPhone 13 Pro",
+      "price": 1099.99,
       "categoryId": 1,
-      "stock": 25,
-      "rating": 4.5,
-      "image": "https://picsum.photos/500?image=101",
-      "description": "Noise-cancelling wireless headphones with 20-hour battery."
+      "stock": 56,
+      "rating": 4.12,
+      "image": "https://cdn.dummyjson.com/product-images/smartphones/iphone-13-pro/thumbnail.webp",
+      "description": "The iPhone 13 Pro is a cutting-edge smartphone with a powerful camera system, high-performance chip, and stunning display."
     },
     {
       "id": "2",
-      "name": "Smartwatch Pro Series",
-      "price": 129.99,
+      "name": "Samsung Galaxy S10",
+      "price": 699.99,
       "categoryId": 1,
-      "stock": 14,
-      "rating": 4.8,
-      "image": "https://picsum.photos/500?image=102",
-      "description": "GPS, AMOLED display, health tracking, durable build."
+      "stock": 19,
+      "rating": 3.06,
+      "image": "https://cdn.dummyjson.com/product-images/smartphones/samsung-galaxy-s10/thumbnail.webp",
+      "description": "The Samsung Galaxy S10 is a flagship device featuring a dynamic AMOLED display, versatile camera system, and powerful performance."
     },
     {
       "id": "3",
-      "name": "USB-C Fast Charger 30W",
-      "price": 19.99,
+      "name": "Oppo F19 Pro Plus",
+      "price": 399.99,
       "categoryId": 1,
-      "stock": 100,
-      "rating": 4.4,
-      "image": "https://picsum.photos/500?image=103",
-      "description": "Fast charging with overheat protection."
+      "stock": 78,
+      "rating": 3.51,
+      "image": "https://cdn.dummyjson.com/product-images/smartphones/oppo-f19-pro-plus/thumbnail.webp",
+      "description": "The Oppo F19 Pro Plus is a feature-rich smartphone with a focus on camera capabilities and premium user experience."
     },
     {
       "id": "4",
-      "name": "Portable Bluetooth Speaker",
-      "price": 39.99,
+      "name": "iPad Mini 2021 Starlight",
+      "price": 499.99,
       "categoryId": 1,
-      "stock": 30,
-      "rating": 4.2,
-      "image": "https://picsum.photos/500?image=104",
-      "description": "Water-resistant outdoor speaker with deep bass."
+      "stock": 47,
+      "rating": 3.18,
+      "image": "https://cdn.dummyjson.com/product-images/tablets/ipad-mini-2021-starlight/thumbnail.webp",
+      "description": "The iPad Mini 2021 in Starlight is a compact and powerful tablet from Apple with a stunning Retina display."
     },
     {
       "id": "5",
-      "name": "4K LED Monitor 27-inch",
-      "price": 299.99,
+      "name": "Samsung Galaxy Tab S8 Plus",
+      "price": 599.99,
       "categoryId": 1,
-      "stock": 10,
-      "rating": 4.7,
-      "image": "https://picsum.photos/500?image=105",
-      "description": "Crisp 4K display with HDR and 144Hz refresh rate."
+      "stock": 62,
+      "rating": 4.68,
+      "image": "https://cdn.dummyjson.com/product-images/tablets/samsung-galaxy-tab-s8-plus-grey/thumbnail.webp",
+      "description": "The Samsung Galaxy Tab S8 Plus is a high-performance Android tablet with a large AMOLED display and S Pen support."
     },
     {
       "id": "6",
-      "name": "Men’s Casual Sneakers",
-      "price": 39.99,
+      "name": "Calvin Klein Heel Shoes",
+      "price": 79.99,
       "categoryId": 2,
-      "stock": 32,
-      "rating": 4.2,
-      "image": "https://picsum.photos/500?image=106",
-      "description": "Lightweight sneakers perfect for everyday wear."
+      "stock": 93,
+      "rating": 4.92,
+      "image": "https://cdn.dummyjson.com/product-images/womens-shoes/calvin-klein-heel-shoes/thumbnail.webp",
+      "description": "Calvin Klein Heel Shoes are elegant and sophisticated, designed for formal occasions with high-quality materials."
     },
     {
       "id": "7",
-      "name": "Women's Summer Dress Floral",
-      "price": 29.99,
+      "name": "Dress Pea",
+      "price": 9.99,
       "categoryId": 2,
-      "stock": 18,
-      "rating": 4.3,
-      "image": "https://picsum.photos/500?image=107",
-      "description": "Floral cotton dress ideal for summer outings."
+      "stock": 6,
+      "rating": 4.88,
+      "image": "https://cdn.dummyjson.com/product-images/womens-dresses/dress-pea/thumbnail.webp",
+      "description": "The Dress Pea is a stylish and comfortable dress with a pea pattern. Perfect for casual outings."
     },
     {
       "id": "8",
-      "name": "Men's Leather Jacket",
-      "price": 89.99,
+      "name": "Prada Women Bag",
+      "price": 599.99,
       "categoryId": 2,
-      "stock": 12,
-      "rating": 4.6,
-      "image": "https://picsum.photos/500?image=108",
-      "description": "Premium leather jacket for casual and formal wear."
+      "stock": 75,
+      "rating": 2.71,
+      "image": "https://cdn.dummyjson.com/product-images/womens-bags/prada-women-bag/thumbnail.webp",
+      "description": "The Prada Women Bag is an iconic designer bag that exudes elegance and luxury."
     },
     {
       "id": "9",
-      "name": "Women's Running Shoes",
-      "price": 49.99,
+      "name": "Green Crystal Earring",
+      "price": 29.99,
       "categoryId": 2,
-      "stock": 40,
-      "rating": 4.4,
-      "image": "https://picsum.photos/500?image=109",
-      "description": "Comfortable running shoes with breathable mesh."
+      "stock": 54,
+      "rating": 3.96,
+      "image": "https://cdn.dummyjson.com/product-images/womens-jewellery/green-crystal-earring/thumbnail.webp",
+      "description": "The Green Crystal Earring is a dazzling accessory featuring a vibrant green crystal, adding elegance to your ensemble."
     },
     {
       "id": "10",
-      "name": "Men's Hoodie Premium",
-      "price": 34.99,
+      "name": "Black Sun Glasses",
+      "price": 29.99,
       "categoryId": 2,
-      "stock": 28,
-      "rating": 4.5,
-      "image": "https://picsum.photos/500?image=110",
-      "description": "Soft fleece hoodie suitable for chilly weather."
+      "stock": 60,
+      "rating": 4.41,
+      "image": "https://cdn.dummyjson.com/product-images/sunglasses/black-sun-glasses/thumbnail.webp",
+      "description": "The Black Sun Glasses are a classic and stylish choice, featuring a sleek black frame and tinted lenses."
     },
     {
       "id": "11",
-      "name": "Non-stick Cookware Set (10 pcs)",
-      "price": 89.99,
+      "name": "Annibale Colombo Bed",
+      "price": 1899.99,
       "categoryId": 3,
-      "stock": 12,
-      "rating": 4.6,
-      "image": "https://picsum.photos/500?image=111",
-      "description": "Durable cookware with non-stick coating."
+      "stock": 88,
+      "rating": 4.77,
+      "image": "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-bed/thumbnail.webp",
+      "description": "The Annibale Colombo Bed is a luxurious and elegant bed frame, crafted with high-quality materials."
     },
     {
       "id": "12",
-      "name": "Electric Kettle 1.8L",
-      "price": 24.99,
+      "name": "Annibale Colombo Sofa",
+      "price": 2499.99,
       "categoryId": 3,
-      "stock": 45,
-      "rating": 4.1,
-      "image": "https://picsum.photos/500?image=112",
-      "description": "Boil water fast with auto shut-off protection."
+      "stock": 60,
+      "rating": 3.92,
+      "image": "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-sofa/thumbnail.webp",
+      "description": "The Annibale Colombo Sofa is a sophisticated and comfortable seating option with premium upholstery."
     },
     {
       "id": "13",
-      "name": "Air Fryer 5.5L XL",
-      "price": 129.99,
+      "name": "Decoration Swing",
+      "price": 59.99,
       "categoryId": 3,
-      "stock": 15,
-      "rating": 4.7,
-      "image": "https://picsum.photos/500?image=113",
-      "description": "Healthy cooking with rapid air technology."
+      "stock": 47,
+      "rating": 3.16,
+      "image": "https://cdn.dummyjson.com/product-images/home-decoration/decoration-swing/thumbnail.webp",
+      "description": "The Decoration Swing is a charming addition to your home decor, crafted with intricate details for elegance."
     },
     {
       "id": "14",
-      "name": "Stainless Steel Knife Set",
-      "price": 59.99,
-      "categoryId": 3,
-      "stock": 25,
-      "rating": 4.5,
-      "image": "https://picsum.photos/500?image=114",
-      "description": "Professional-grade kitchen knife set."
-    },
-    {
-      "id": "15",
-      "name": "Vacuum Cleaner Pro",
-      "price": 199.99,
-      "categoryId": 3,
-      "stock": 8,
-      "rating": 4.8,
-      "image": "https://picsum.photos/500?image=115",
-      "description": "Powerful suction for all surfaces."
-    },
-    {
-      "id": "16",
-      "name": "Professional Basketball",
-      "price": 24.99,
-      "categoryId": 4,
-      "stock": 40,
-      "rating": 4.4,
-      "image": "https://picsum.photos/500?image=116",
-      "description": "Durable basketball for indoor and outdoor use."
-    },
-    {
-      "id": "17",
-      "name": "Football Training Set",
-      "price": 34.99,
-      "categoryId": 4,
-      "stock": 22,
-      "rating": 4.3,
-      "image": "https://picsum.photos/500?image=117",
-      "description": "Full football training set for beginners."
-    },
-    {
-      "id": "18",
-      "name": "Yoga Mat Anti-Slip",
-      "price": 19.99,
-      "categoryId": 4,
-      "stock": 50,
-      "rating": 4.7,
-      "image": "https://picsum.photos/500?image=118",
-      "description": "High-density mat with anti-slip texture."
-    },
-    {
-      "id": "19",
-      "name": "Adjustable Dumbbells (Pair)",
-      "price": 79.99,
-      "categoryId": 4,
-      "stock": 16,
-      "rating": 4.8,
-      "image": "https://picsum.photos/500?image=119",
-      "description": "Adjustable weights for full-body workouts."
-    },
-    {
-      "id": "20",
-      "name": "Cycling Helmet Pro",
-      "price": 49.99,
-      "categoryId": 4,
-      "stock": 14,
-      "rating": 4.5,
-      "image": "https://picsum.photos/500?image=120",
-      "description": "Lightweight helmet with shock-absorbing layer."
-    },
-    {
-      "id": "21",
-      "name": "Remote Control Car",
-      "price": 34.99,
-      "categoryId": 5,
-      "stock": 22,
-      "rating": 4.1,
-      "image": "https://picsum.photos/500?image=121",
-      "description": "Rechargeable high-speed RC car."
-    },
-    {
-      "id": "22",
-      "name": "Building Blocks 120 pcs",
-      "price": 19.99,
-      "categoryId": 5,
-      "stock": 45,
-      "rating": 4.5,
-      "image": "https://picsum.photos/500?image=122",
-      "description": "Colorful creative building blocks."
-    },
-    {
-      "id": "23",
-      "name": "Stuffed Animal Bear",
-      "price": 14.99,
-      "categoryId": 5,
-      "stock": 60,
-      "rating": 4.4,
-      "image": "https://picsum.photos/500?image=123",
-      "description": "Soft plush bear toy for kids."
-    },
-    {
-      "id": "24",
-      "name": "Toy Kitchen Playset",
-      "price": 49.99,
-      "categoryId": 5,
-      "stock": 20,
-      "rating": 4.6,
-      "image": "https://picsum.photos/500?image=124",
-      "description": "Miniature kitchen playset for children."
-    },
-    {
-      "id": "25",
-      "name": "Puzzle 1000 Pieces",
-      "price": 12.99,
-      "categoryId": 5,
-      "stock": 80,
-      "rating": 4.3,
-      "image": "https://picsum.photos/500?image=125",
-      "description": "Challenging puzzle game for all ages."
-    },
-    {
-      "id": "26",
-      "name": "Tablet 10-inch HD",
-      "price": 149.99,
-      "categoryId": 1,
-      "stock": 18,
-      "rating": 4.6,
-      "image": "https://picsum.photos/500?image=126",
-      "description": "HD display, long battery, fast performance."
-    },
-    {
-      "id": "27",
-      "name": "Gaming Keyboard RGB",
-      "price": 49.99,
-      "categoryId": 1,
-      "stock": 30,
-      "rating": 4.7,
-      "image": "https://picsum.photos/500?image=127",
-      "description": "Mechanical keyboard with RGB lighting modes."
-    },
-    {
-      "id": "28",
-      "name": "Noise Cancelling Microphone",
-      "price": 79.99,
-      "categoryId": 1,
-      "stock": 14,
-      "rating": 4.6,
-      "image": "https://picsum.photos/500?image=128",
-      "description": "Professional microphone for streaming."
-    },
-    {
-      "id": "29",
-      "name": "Power Bank 20000mAh",
-      "price": 29.99,
-      "categoryId": 1,
-      "stock": 50,
-      "rating": 4.4,
-      "image": "https://picsum.photos/500?image=129",
-      "description": "Fast charging, dual output."
-    },
-    {
-      "id": "30",
-      "name": "LED Desk Lamp",
-      "price": 22.99,
-      "categoryId": 1,
-      "stock": 40,
-      "rating": 4.2,
-      "image": "https://picsum.photos/500?image=130",
-      "description": "Adjustable brightness and eye protection."
-    },
-    {
-      "id": "31",
-      "name": "Men's Polo Shirt",
-      "price": 24.99,
-      "categoryId": 2,
-      "stock": 35,
-      "rating": 4.1,
-      "image": "https://picsum.photos/500?image=131",
-      "description": "Soft cotton polo shirt in multiple colors."
-    },
-    {
-      "id": "32",
-      "name": "Women's Handbag Leather",
-      "price": 69.99,
-      "categoryId": 2,
-      "stock": 16,
-      "rating": 4.8,
-      "image": "https://picsum.photos/500?image=132",
-      "description": "Elegant handbag with high-quality stitching."
-    },
-    {
-      "id": "33",
-      "name": "Unisex Sunglasses UV400",
-      "price": 14.99,
-      "categoryId": 2,
-      "stock": 70,
-      "rating": 4.2,
-      "image": "https://picsum.photos/500?image=133",
-      "description": "UV protection with stylish frame."
-    },
-    {
-      "id": "34",
-      "name": "Men's Formal Shirt",
-      "price": 29.99,
-      "categoryId": 2,
-      "stock": 25,
-      "rating": 4.3,
-      "image": "https://picsum.photos/500?image=134",
-      "description": "Premium fabric, perfect for office wear."
-    },
-    {
-      "id": "35",
-      "name": "Women's Winter Coat",
-      "price": 119.99,
-      "categoryId": 2,
-      "stock": 10,
-      "rating": 4.9,
-      "image": "https://picsum.photos/500?image=135",
-      "description": "Warm winter coat with fur lining."
-    },
-    {
-      "id": "36",
-      "name": "Rice Cooker 1.5L",
-      "price": 49.99,
-      "categoryId": 3,
-      "stock": 34,
-      "rating": 4.4,
-      "image": "https://picsum.photos/500?image=136",
-      "description": "Non-stick inner pot with timer."
-    },
-    {
-      "id": "37",
-      "name": "Blender 600W",
+      "name": "House Showpiece Plant",
       "price": 39.99,
       "categoryId": 3,
       "stock": 28,
+      "rating": 4.67,
+      "image": "https://cdn.dummyjson.com/product-images/home-decoration/house-showpiece-plant/thumbnail.webp",
+      "description": "The House Showpiece Plant is an artificial plant that brings a touch of nature to your home without maintenance."
+    },
+    {
+      "id": "15",
+      "name": "Table Lamp",
+      "price": 49.99,
+      "categoryId": 3,
+      "stock": 9,
+      "rating": 3.55,
+      "image": "https://cdn.dummyjson.com/product-images/home-decoration/table-lamp/thumbnail.webp",
+      "description": "The Table Lamp is a functional and decorative lighting solution with a modern design for your living space."
+    },
+    {
+      "id": "16",
+      "name": "American Football",
+      "price": 19.99,
+      "categoryId": 4,
+      "stock": 53,
+      "rating": 4.91,
+      "image": "https://cdn.dummyjson.com/product-images/sports-accessories/american-football/thumbnail.webp",
+      "description": "The American Football is a classic ball used in American football games, designed for throwing and catching."
+    },
+    {
+      "id": "17",
+      "name": "Baseball Ball",
+      "price": 8.99,
+      "categoryId": 4,
+      "stock": 100,
+      "rating": 2.57,
+      "image": "https://cdn.dummyjson.com/product-images/sports-accessories/baseball-ball/thumbnail.webp",
+      "description": "The Baseball Ball is a standard baseball featuring a durable leather cover, designed for pitching and hitting."
+    },
+    {
+      "id": "18",
+      "name": "Basketball",
+      "price": 14.99,
+      "categoryId": 4,
+      "stock": 75,
+      "rating": 4.66,
+      "image": "https://cdn.dummyjson.com/product-images/sports-accessories/basketball/thumbnail.webp",
+      "description": "The Basketball is a standard ball used in basketball games, suitable for both indoor and outdoor play."
+    },
+    {
+      "id": "19",
+      "name": "Cricket Bat",
+      "price": 29.99,
+      "categoryId": 4,
+      "stock": 98,
+      "rating": 3.17,
+      "image": "https://cdn.dummyjson.com/product-images/sports-accessories/cricket-bat/thumbnail.webp",
+      "description": "The Cricket Bat is an essential piece of cricket equipment made of wood, used by batsmen to hit the ball."
+    },
+    {
+      "id": "20",
+      "name": "Tennis Racket",
+      "price": 49.99,
+      "categoryId": 4,
+      "stock": 6,
+      "rating": 4.03,
+      "image": "https://cdn.dummyjson.com/product-images/sports-accessories/tennis-racket/thumbnail.webp",
+      "description": "The Tennis Racket features a frame with strings and a grip, allowing players to hit the tennis ball with precision."
+    },
+    {
+      "id": "21",
+      "name": "RC Racing Motorcycle",
+      "price": 39.99,
+      "categoryId": 5,
+      "stock": 34,
+      "rating": 4.91,
+      "image": "https://cdn.dummyjson.com/product-images/motorcycle/generic-motorcycle/thumbnail.webp",
+      "description": "A high-speed RC Racing Motorcycle with a balanced design, providing a thrilling and efficient racing experience."
+    },
+    {
+      "id": "22",
+      "name": "Die-cast Kawasaki Model",
+      "price": 89.99,
+      "categoryId": 5,
+      "stock": 52,
+      "rating": 3.98,
+      "image": "https://cdn.dummyjson.com/product-images/motorcycle/kawasaki-z800/thumbnail.webp",
+      "description": "Detailed Die-cast Kawasaki Z800 model, known for its striking design and realistic features for collectors."
+    },
+    {
+      "id": "23",
+      "name": "RC Sportbike Motorcycle",
+      "price": 49.99,
+      "categoryId": 5,
+      "stock": 15,
+      "rating": 3.94,
+      "image": "https://cdn.dummyjson.com/product-images/motorcycle/sportbike-motorcycle/thumbnail.webp",
+      "description": "Remote Control Sportbike designed for speed and agility, perfect for kids looking for a dynamic play experience."
+    },
+    {
+      "id": "24",
+      "name": "Mini Toy Scooter",
+      "price": 29.99,
+      "categoryId": 5,
+      "stock": 84,
+      "rating": 2.53,
+      "image": "https://cdn.dummyjson.com/product-images/motorcycle/scooter-motorcycle/thumbnail.webp",
+      "description": "A practical and fun Mini Toy Scooter, featuring a user-friendly design for easy play and maneuverability."
+    },
+    {
+      "id": "25",
+      "name": "Remote Control Sportbike",
+      "price": 74.99,
+      "categoryId": 5,
+      "stock": 15,
+      "rating": 3.94,
+      "image": "https://cdn.dummyjson.com/product-images/motorcycle/sportbike-motorcycle/thumbnail.webp",
+      "description": "Remote Control Sportbike designed for speed and agility, perfect for kids looking for a dynamic play experience."
+    },
+    {
+      "id": "26",
+      "name": "MacBook Pro",
+      "price": 1749,
+      "categoryId": 1,
+      "stock": 83,
       "rating": 4.1,
-      "image": "https://picsum.photos/500?image=137",
-      "description": "Strong motor and 3-speed settings."
+      "image": "https://cdn.dummyjson.com/product-images/laptops/macbook-pro/thumbnail.webp",
+      "description": "MacBook Pro 2021 with mini-LED display may launch between September, November"
+    },
+    {
+      "id": "27",
+      "name": "Samsung Galaxy Book",
+      "price": 1499,
+      "categoryId": 1,
+      "stock": 50,
+      "rating": 4.25,
+      "image": "https://cdn.dummyjson.com/product-images/laptops/samsung-galaxy-book/thumbnail.webp",
+      "description": "Samsung Galaxy Book S (2020) Laptop With Intel Lakefield Chip, 8GB of RAM Launched"
+    },
+    {
+      "id": "28",
+      "name": "Microsoft Surface Laptop 4",
+      "price": 1499,
+      "categoryId": 1,
+      "stock": 68,
+      "rating": 4.43,
+      "image": "https://cdn.dummyjson.com/product-images/laptops/microsoft-surface-laptop-4/thumbnail.webp",
+      "description": "Style and speed. Stand out on HD video calls backed by Studio Mics. Capture ideas on the vibrant touchscreen."
+    },
+    {
+      "id": "29",
+      "name": "Infinix INBOOK",
+      "price": 1099,
+      "categoryId": 1,
+      "stock": 96,
+      "rating": 4.54,
+      "image": "https://cdn.dummyjson.com/product-images/laptops/infinix-inbook/thumbnail.webp",
+      "description": "Infinix Inbook X1 Ci3 10th 8GB 256GB 14 Win10 Grey – 1 Year Warranty"
+    },
+    {
+      "id": "30",
+      "name": "HP Pavilion 15-DK1056WM",
+      "price": 1099,
+      "categoryId": 1,
+      "stock": 89,
+      "rating": 4.43,
+      "image": "https://cdn.dummyjson.com/product-images/laptops/hp-pavilion-15-dk1056wm/thumbnail.webp",
+      "description": "HP Pavilion 15-DK1056WM Gaming Laptop 10th Gen Core i5, 8GB, 256GB SSD, GTX 1650 4GB, Windows 10"
+    },
+    {
+      "id": "31",
+      "name": "Oppo F19 Pro Plus",
+      "price": 399.99,
+      "categoryId": 1,
+      "stock": 78,
+      "rating": 3.51,
+      "image": "https://cdn.dummyjson.com/product-images/smartphones/oppo-f19-pro-plus/thumbnail.webp",
+      "description": "The Oppo F19 Pro Plus is a feature-rich smartphone with a focus on camera capabilities and a powerful performance for a premium user experience."
+    },
+    {
+      "id": "32",
+      "name": "Oppo K1",
+      "price": 299.99,
+      "categoryId": 1,
+      "stock": 51,
+      "rating": 4.25,
+      "image": "https://cdn.dummyjson.com/product-images/smartphones/oppo-k1/thumbnail.webp",
+      "description": "The Oppo K1 series offers a range of smartphones with various features and specifications. Known for their stylish design and reliable performance."
+    },
+    {
+      "id": "33",
+      "name": "Realme C35",
+      "price": 149.99,
+      "categoryId": 1,
+      "stock": 48,
+      "rating": 4.2,
+      "image": "https://cdn.dummyjson.com/product-images/smartphones/realme-c35/thumbnail.webp",
+      "description": "The Realme C35 is a budget-friendly smartphone with a focus on providing essential features for everyday use."
+    },
+    {
+      "id": "34",
+      "name": "Realme X",
+      "price": 299.99,
+      "categoryId": 1,
+      "stock": 12,
+      "rating": 3.7,
+      "image": "https://cdn.dummyjson.com/product-images/smartphones/realme-x/thumbnail.webp",
+      "description": "The Realme X is a mid-range smartphone known for its sleek design and impressive display."
+    },
+    {
+      "id": "35",
+      "name": "Realme XT",
+      "price": 349.99,
+      "categoryId": 1,
+      "stock": 80,
+      "rating": 4.58,
+      "image": "https://cdn.dummyjson.com/product-images/smartphones/realme-xt/thumbnail.webp",
+      "description": "The Realme XT is a feature-rich smartphone with a focus on camera technology. It comes equipped with advanced camera sensors."
+    },
+    {
+      "id": "36",
+      "name": "Men Check Shirt",
+      "price": 27.99,
+      "categoryId": 2,
+      "stock": 95,
+      "rating": 2.72,
+      "image": "https://cdn.dummyjson.com/product-images/mens-shirts/men-check-shirt/thumbnail.webp",
+      "description": "The Men Check Shirt is a classic and versatile shirt featuring a stylish check pattern."
+    },
+    {
+      "id": "37",
+      "name": "Gigabyte Aorus Men Tshirt",
+      "price": 24.99,
+      "categoryId": 2,
+      "stock": 64,
+      "rating": 4.95,
+      "image": "https://cdn.dummyjson.com/product-images/mens-shirts/gigabyte-aorus-men-tshirt/thumbnail.webp",
+      "description": "The Gigabyte Aorus Men Tshirt is a cool and casual t-shirt for gaming enthusiasts. It features the Aorus logo and is made from soft cotton."
     },
     {
       "id": "38",
-      "name": "Ceramic Dinnerware Set",
-      "price": 79.99,
-      "categoryId": 3,
-      "stock": 20,
-      "rating": 4.7,
-      "image": "https://picsum.photos/500?image=138",
-      "description": "16-piece ceramic dinnerware, elegant design."
+      "name": "Man Plaid Shirt",
+      "price": 34.99,
+      "categoryId": 2,
+      "stock": 65,
+      "rating": 3.66,
+      "image": "https://cdn.dummyjson.com/product-images/mens-shirts/man-plaid-shirt/thumbnail.webp",
+      "description": "The Man Plaid Shirt is a versatile and trendy shirt for men. It features a plaid pattern and is suitable for both casual and semi-formal occasions."
     },
     {
       "id": "39",
-      "name": "Robot Vacuum Mini",
-      "price": 149.99,
-      "categoryId": 3,
-      "stock": 12,
-      "rating": 4.6,
-      "image": "https://picsum.photos/500?image=139",
-      "description": "Smart cleaning with auto navigation."
+      "name": "Man Short Sleeve Shirt",
+      "price": 19.99,
+      "categoryId": 2,
+      "stock": 20,
+      "rating": 4.93,
+      "image": "https://cdn.dummyjson.com/product-images/mens-shirts/man-short-sleeve-shirt/thumbnail.webp",
+      "description": "The Man Short Sleeve Shirt is a comfortable and breathable shirt for warm weather. It features short sleeves and a relaxed fit."
     },
     {
       "id": "40",
-      "name": "Electric Grill 2-in-1",
+      "name": "Men Check Shirt",
+      "price": 27.99,
+      "categoryId": 2,
+      "stock": 69,
+      "rating": 2.9,
+      "image": "https://cdn.dummyjson.com/product-images/mens-shirts/men-check-shirt/thumbnail.webp",
+      "description": "The Men Check Shirt is a classic and smart shirt for men. It features a check pattern and is perfect for office wear or casual outings."
+    },
+    {
+      "id": "41",
+      "name": "Nike Air Jordan 1 Red And Black",
+      "price": 149.99,
+      "categoryId": 2,
+      "stock": 15,
+      "rating": 3.31,
+      "image": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/thumbnail.webp",
+      "description": "The Nike Air Jordan 1 Red And Black is an iconic sneaker known for its bold design and basketball heritage."
+    },
+    {
+      "id": "42",
+      "name": "Nike Basketball Shoes",
+      "price": 129.99,
+      "categoryId": 2,
+      "stock": 6,
+      "rating": 4.14,
+      "image": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-basketball-shoes/thumbnail.webp",
+      "description": "The Nike Basketball Shoes are designed for performance on the court. They feature responsive cushioning and excellent traction."
+    },
+    {
+      "id": "43",
+      "name": "Puma Future Rider Trainers",
+      "price": 89.99,
+      "categoryId": 2,
+      "stock": 10,
+      "rating": 4.85,
+      "image": "https://cdn.dummyjson.com/product-images/mens-shoes/puma-future-rider-trainers/thumbnail.webp",
+      "description": "The Puma Future Rider Trainers offer a retro-inspired look with modern comfort. They feature a lightweight design and shock-absorbing outsole."
+    },
+    {
+      "id": "44",
+      "name": "Sneakers Joggers Shoes",
       "price": 59.99,
+      "categoryId": 2,
+      "stock": 6,
+      "rating": 3.19,
+      "image": "https://cdn.dummyjson.com/product-images/mens-shoes/sneakers-joggers-shoes/thumbnail.webp",
+      "description": "The Sneakers Joggers Shoes are versatile and comfortable shoes for everyday wear. They are perfect for jogging, walking, or casual outings."
+    },
+    {
+      "id": "45",
+      "name": "Sports Sneakers Off White Red",
+      "price": 109.99,
+      "categoryId": 2,
+      "stock": 62,
+      "rating": 4.69,
+      "image": "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/thumbnail.webp",
+      "description": "Another variant of the Sports Sneakers in Off White Red, featuring a unique design."
+    },
+    {
+      "id": "46",
+      "name": "Bamboo Spatula",
+      "price": 7.99,
       "categoryId": 3,
-      "stock": 18,
+      "stock": 37,
+      "rating": 3.27,
+      "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/bamboo-spatula/thumbnail.webp",
+      "description": "The Bamboo Spatula is a versatile kitchen tool made from eco-friendly bamboo. Ideal for flipping, stirring, and serving various dishes."
+    },
+    {
+      "id": "47",
+      "name": "Black Aluminium Cup",
+      "price": 5.99,
+      "categoryId": 3,
+      "stock": 75,
+      "rating": 4.46,
+      "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/black-aluminium-cup/thumbnail.webp",
+      "description": "The Black Aluminium Cup is a stylish and durable cup suitable for both hot and cold beverages. Its sleek black design adds a modern touch."
+    },
+    {
+      "id": "48",
+      "name": "Black Whisk",
+      "price": 9.99,
+      "categoryId": 3,
+      "stock": 73,
+      "rating": 3.9,
+      "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/black-whisk/thumbnail.webp",
+      "description": "The Black Whisk is a kitchen essential for whisking and beating ingredients. Its ergonomic handle and sleek design make it a practical tool."
+    },
+    {
+      "id": "49",
+      "name": "Boxed Blender",
+      "price": 39.99,
+      "categoryId": 3,
+      "stock": 9,
+      "rating": 4.56,
+      "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/boxed-blender/thumbnail.webp",
+      "description": "The Boxed Blender is a powerful and compact blender perfect for smoothies, shakes, and more. Its convenient design makes it versatile."
+    },
+    {
+      "id": "50",
+      "name": "Carbon Steel Wok",
+      "price": 29.99,
+      "categoryId": 3,
+      "stock": 40,
+      "rating": 4.05,
+      "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/carbon-steel-wok/thumbnail.webp",
+      "description": "The Carbon Steel Wok is a versatile cooking pan suitable for stir-frying, sautéing, and deep frying. Its sturdy construction ensures even heat."
+    },
+    {
+      "id": "51",
+      "name": "Chopping Board",
+      "price": 12.99,
+      "categoryId": 3,
+      "stock": 14,
+      "rating": 3.7,
+      "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/chopping-board/thumbnail.webp",
+      "description": "The Chopping Board is an essential kitchen accessory for food preparation. Made from durable material, it provides a safe surface."
+    },
+    {
+      "id": "52",
+      "name": "Citrus Squeezer Yellow",
+      "price": 8.99,
+      "categoryId": 3,
+      "stock": 22,
+      "rating": 4.63,
+      "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/citrus-squeezer-yellow/thumbnail.webp",
+      "description": "The Citrus Squeezer in Yellow is a handy tool for extracting juice from citrus fruits. Its vibrant color adds a cheerful touch."
+    },
+    {
+      "id": "53",
+      "name": "Egg Slicer",
+      "price": 6.99,
+      "categoryId": 3,
+      "stock": 40,
+      "rating": 3.09,
+      "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/egg-slicer/thumbnail.webp",
+      "description": "The Egg Slicer is a convenient tool for slicing boiled eggs evenly. It's perfect for salads, sandwiches, and other dishes."
+    },
+    {
+      "id": "54",
+      "name": "Electric Stove",
+      "price": 49.99,
+      "categoryId": 3,
+      "stock": 21,
+      "rating": 4.11,
+      "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/electric-stove/thumbnail.webp",
+      "description": "The Electric Stove provides a portable and efficient cooking solution. Ideal for small kitchens or as an additional cooking surface."
+    },
+    {
+      "id": "55",
+      "name": "Fine Mesh Strainer",
+      "price": 9.99,
+      "categoryId": 3,
+      "stock": 85,
+      "rating": 3.04,
+      "image": "https://cdn.dummyjson.com/product-images/kitchen-accessories/fine-mesh-strainer/thumbnail.webp",
+      "description": "The Fine Mesh Strainer is a versatile tool for straining liquids and sifting dry ingredients. Its fine mesh ensures efficient filtering."
+    },
+    {
+      "id": "56",
+      "name": "Cricket Helmet",
+      "price": 44.99,
+      "categoryId": 4,
+      "stock": 42,
+      "rating": 4.31,
+      "image": "https://cdn.dummyjson.com/product-images/sports-accessories/cricket-helmet/thumbnail.webp",
+      "description": "The Cricket Helmet is a protective headgear worn by cricket players. It features a sturdy shell and face guard for safety."
+    },
+    {
+      "id": "57",
+      "name": "Cricket Wicket",
+      "price": 29.99,
+      "categoryId": 4,
+      "stock": 3,
+      "rating": 4.16,
+      "image": "https://cdn.dummyjson.com/product-images/sports-accessories/cricket-wicket/thumbnail.webp",
+      "description": "The Cricket Wicket is a set of three wooden stumps and two bails used in cricket matches. It is essential for the game."
+    },
+    {
+      "id": "58",
+      "name": "Feathers Shuttlecock",
+      "price": 5.99,
+      "categoryId": 4,
+      "stock": 60,
+      "rating": 3.25,
+      "image": "https://cdn.dummyjson.com/product-images/sports-accessories/feathers-shuttlecock/thumbnail.webp",
+      "description": "The Feathers Shuttlecock is a high-quality shuttlecock used in badminton. It features natural feathers for excellent flight stability."
+    },
+    {
+      "id": "59",
+      "name": "Golf Ball",
+      "price": 9.99,
+      "categoryId": 4,
+      "stock": 61,
+      "rating": 4.84,
+      "image": "https://cdn.dummyjson.com/product-images/sports-accessories/golf-ball/thumbnail.webp",
+      "description": "The Golf Ball is a standard ball used in golf. It features a dimpled surface for aerodynamic flight and distance."
+    },
+    {
+      "id": "60",
+      "name": "Iron Golf",
+      "price": 49.99,
+      "categoryId": 4,
+      "stock": 92,
+      "rating": 4.97,
+      "image": "https://cdn.dummyjson.com/product-images/sports-accessories/iron-golf/thumbnail.webp",
+      "description": "The Iron Golf is a type of golf club used for various shots on the course. It features a metal head and is designed for precision."
+    },
+    {
+      "id": "61",
+      "name": "Tennis Ball",
+      "price": 6.99,
+      "categoryId": 4,
+      "stock": 15,
+      "rating": 4.28,
+      "image": "https://cdn.dummyjson.com/product-images/sports-accessories/tennis-ball/thumbnail.webp",
+      "description": "The Tennis Ball is a standard ball used in tennis. It features a felt covering and is designed for consistent bounce and durability."
+    },
+    {
+      "id": "62",
+      "name": "Volleyball",
+      "price": 11.99,
+      "categoryId": 4,
+      "stock": 82,
+      "rating": 4.46,
+      "image": "https://cdn.dummyjson.com/product-images/sports-accessories/volleyball/thumbnail.webp",
+      "description": "The Volleyball is a standard ball used in volleyball games. It features a soft touch and is suitable for both indoor and beach play."
+    },
+    {
+      "id": "63",
+      "name": "Black Sun Glasses",
+      "price": 29.99,
+      "categoryId": 4,
+      "stock": 60,
+      "rating": 4.41,
+      "image": "https://cdn.dummyjson.com/product-images/sunglasses/black-sun-glasses/thumbnail.webp",
+      "description": "The Black Sun Glasses are a classic and stylish choice, featuring a sleek black frame and tinted lenses. Great for outdoor sports."
+    },
+    {
+      "id": "64",
+      "name": "Classic Sun Glasses",
+      "price": 24.99,
+      "categoryId": 4,
+      "stock": 1,
+      "rating": 3.86,
+      "image": "https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/thumbnail.webp",
+      "description": "The Classic Sun Glasses offer a timeless design with a neutral frame and UV-protected lenses. Perfect for sunny days on the field."
+    },
+    {
+      "id": "65",
+      "name": "Green and Black Glasses",
+      "price": 34.99,
+      "categoryId": 4,
+      "stock": 24,
+      "rating": 4.55,
+      "image": "https://cdn.dummyjson.com/product-images/sunglasses/green-and-black-glasses/thumbnail.webp",
+      "description": "The Green and Black Glasses feature a bold combination of green and black colors. Stylish protection for active lifestyles."
+    },
+    {
+      "id": "66",
+      "name": "1:18 Scale Dodge Charger 1970",
+      "price": 49.99,
+      "categoryId": 5,
+      "stock": 54,
+      "rating": 4.05,
+      "image": "https://cdn.dummyjson.com/product-images/vehicle/dodge-charger-1970/thumbnail.webp",
+      "description": "Detailed 1:18 scale die-cast model of the classic Dodge Charger 1970. Features opening doors and hood."
+    },
+    {
+      "id": "67",
+      "name": "RC Dodge Durango Truck",
+      "price": 69.99,
+      "categoryId": 5,
+      "stock": 69,
+      "rating": 4.02,
+      "image": "https://cdn.dummyjson.com/product-images/vehicle/dodge-durango/thumbnail.webp",
+      "description": "Remote control Dodge Durango monster truck. High speed and off-road capabilities for kids."
+    },
+    {
+      "id": "68",
+      "name": "Honda Civic Model Kit",
+      "price": 24.99,
+      "categoryId": 5,
+      "stock": 28,
+      "rating": 4.06,
+      "image": "https://cdn.dummyjson.com/product-images/vehicle/honda-civic/thumbnail.webp",
+      "description": "Build your own Honda Civic with this detailed plastic model kit. Paints and glue sold separately."
+    },
+    {
+      "id": "69",
+      "name": "Mercedes-Benz E-Class Toy Car",
+      "price": 15.99,
+      "categoryId": 5,
+      "stock": 49,
+      "rating": 4.38,
+      "image": "https://cdn.dummyjson.com/product-images/vehicle/mercedes-benz-e-class/thumbnail.webp",
+      "description": "Friction powered Mercedes-Benz E-Class toy car. Pull back and watch it go!"
+    },
+    {
+      "id": "70",
+      "name": "Nissan GT-R Drift RC Car",
+      "price": 89.99,
+      "categoryId": 5,
+      "stock": 24,
       "rating": 4.3,
-      "image": "https://picsum.photos/500?image=140",
-      "description": "Indoor grill and hotpot combined."
+      "image": "https://cdn.dummyjson.com/product-images/vehicle/nissan-gt-r/thumbnail.webp",
+      "description": "High performance RC drift car modeled after the Nissan GT-R. Includes drift tires and rechargeable battery."
+    },
+    {
+      "id": "71",
+      "name": "Toy Motorbike Figure",
+      "price": 12.99,
+      "categoryId": 5,
+      "stock": 34,
+      "rating": 4.91,
+      "image": "https://cdn.dummyjson.com/product-images/motorcycle/generic-motorcycle/thumbnail.webp",
+      "description": "Small plastic motorbike figure for play sets. Compatible with standard action figures."
+    },
+    {
+      "id": "72",
+      "name": "Kawasaki Z800 Die-cast Model",
+      "price": 34.99,
+      "categoryId": 5,
+      "stock": 52,
+      "rating": 3.98,
+      "image": "https://cdn.dummyjson.com/product-images/motorcycle/kawasaki-z800/thumbnail.webp",
+      "description": "Collector's edition die-cast model of the Kawasaki Z800. Authentic detailing and moving wheels."
+    },
+    {
+      "id": "73",
+      "name": "Toy Generic Motorcycle",
+      "price": 29.99,
+      "categoryId": 5,
+      "stock": 34,
+      "rating": 4.91,
+      "image": "https://cdn.dummyjson.com/product-images/motorcycle/generic-motorcycle/thumbnail.webp",
+      "description": "A versatile and reliable toy bike suitable for various play scenarios."
+    },
+    {
+      "id": "74",
+      "name": "Miniature Scooter Toy",
+      "price": 9.99,
+      "categoryId": 5,
+      "stock": 84,
+      "rating": 2.53,
+      "image": "https://cdn.dummyjson.com/product-images/motorcycle/scooter-motorcycle/thumbnail.webp",
+      "description": "Cute miniature scooter toy with working kickstand. Great desk accessory or toy."
+    },
+    {
+      "id": "75",
+      "name": "Remote Control Sportbike",
+      "price": 59.99,
+      "categoryId": 5,
+      "stock": 0,
+      "rating": 3.94,
+      "image": "https://cdn.dummyjson.com/product-images/motorcycle/sportbike-motorcycle/thumbnail.webp",
+      "description": "Fast RC sportbike with stabilizing gyro. Performs wheelies and sharp turns."
     }
   ],
   "users": [
@@ -455,11 +805,36 @@
     {
       "id": "5aa9",
       "userId": 1764674989332,
-      "productId": "8"
+      "productId": 8
     },
     {
       "id": "8437",
       "userId": 1764674989332,
+      "productId": 2
+    },
+    {
+      "id": "9c21",
+      "userId": 1764674989332,
+      "productId": 13
+    },
+    {
+      "id": "7f45",
+      "userId": 1764674989332,
+      "productId": 22
+    },
+    {
+      "id": "3d88",
+      "userId": 1764674989332,
+      "productId": 18
+    },
+    {
+      "id": "cbb1",
+      "userId": "1",
+      "productId": 1
+    },
+    {
+      "id": "6157",
+      "userId": "1",
       "productId": 1
     }
   ],
@@ -468,19 +843,91 @@
       "id": "f029",
       "productId": 1,
       "userId": 1764674989332,
-      "rating": 3,
-      "comment": "Oke",
-      "date": "2025-12-02T11:33:51.697Z"
+      "rating": 5,
+      "comment": "Amazing sound quality! The noise cancellation is incredible and battery life is exactly as advertised.",
+      "date": "2025-11-15T10:20:30.697Z"
     },
     {
       "id": "673d",
-      "productId": 1,
+      "productId": 2,
       "userId": 1764674989332,
       "rating": 5,
-      "comment": "vv",
-      "date": "2025-12-02T13:00:59.030Z"
+      "comment": "Best smartwatch I've ever owned. The health tracking features are accurate and the display is gorgeous.",
+      "date": "2025-11-20T14:45:12.030Z"
+    },
+    {
+      "id": "a4b2",
+      "productId": 8,
+      "userId": 1764674989332,
+      "rating": 5,
+      "comment": "The leather quality is top-notch! Fits perfectly and looks incredibly stylish. Worth every penny.",
+      "date": "2025-11-25T09:15:45.123Z"
+    },
+    {
+      "id": "e8c9",
+      "productId": 13,
+      "userId": 1764674989332,
+      "rating": 4,
+      "comment": "Great air fryer! Cooks food evenly and quickly. The only downside is it's a bit bulky on the counter.",
+      "date": "2025-11-28T16:30:22.456Z"
+    },
+    {
+      "id": "d2f7",
+      "productId": 22,
+      "userId": 1764674989332,
+      "rating": 5,
+      "comment": "My kids absolutely love this LEGO set! Hours of creative fun and the quality is excellent as always.",
+      "date": "2025-12-01T11:05:33.789Z"
+    },
+    {
+      "id": "b9a3",
+      "productId": 18,
+      "userId": 1764674989332,
+      "rating": 5,
+      "comment": "Perfect yoga mat! Great grip even when sweaty, and the cushioning is just right for my joints.",
+      "date": "2025-12-05T08:40:15.234Z"
     }
   ],
   "cart": [],
-  "orders": []
+  "orders": [
+    {
+      "id": "1cf8",
+      "userId": "2",
+      "items": [
+        {
+          "id": "2",
+          "name": "Samsung Galaxy S10",
+          "price": 699.99,
+          "categoryId": 1,
+          "stock": 19,
+          "rating": 3.06,
+          "image": "https://cdn.dummyjson.com/product-images/smartphones/samsung-galaxy-s10/thumbnail.webp",
+          "description": "The Samsung Galaxy S10 is a flagship device featuring a dynamic AMOLED display, versatile camera system, and powerful performance.",
+          "quantity": 1
+        },
+        {
+          "id": "3",
+          "name": "Oppo F19 Pro Plus",
+          "price": 399.99,
+          "categoryId": 1,
+          "stock": 78,
+          "rating": 3.51,
+          "image": "https://cdn.dummyjson.com/product-images/smartphones/oppo-f19-pro-plus/thumbnail.webp",
+          "description": "The Oppo F19 Pro Plus is a feature-rich smartphone with a focus on camera capabilities and premium user experience.",
+          "quantity": 1
+        }
+      ],
+      "total": 1099.98,
+      "status": "pending",
+      "date": "2025-12-08T14:49:24.712Z",
+      "shippingInfo": {
+        "name": "John Doe",
+        "email": "john@example.com",
+        "address": "456 User Avenue",
+        "city": "Thượng Phúc",
+        "zipCode": "06000",
+        "phone": "0359538518"
+      }
+    }
+  ]
 }
