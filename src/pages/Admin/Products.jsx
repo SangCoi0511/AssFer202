@@ -1,32 +1,87 @@
 import React, { useState, useEffect } from 'react';
-import { getProducts, deleteProduct, createProduct, updateProduct } from '../../services/api';
+import { getProducts, deleteProduct, createProduct, updateProduct, getCategories } from '../../services/api';
 import { FiEdit, FiTrash2, FiPlus } from 'react-icons/fi';
 import '../../styles/Admin.css';
 
-const ProductFormModal = ({ product, onSubmit, onClose }) => {
+const ProductFormModal = ({ product, onSubmit, onClose, validCategoryIds }) => {
   const isEditing = !!product;
 
   const [formData, setFormData] = useState({
     name: product?.name || '',
     price: product?.price || 0,
     stock: product?.stock || 0,
-    categoryId: product?.categoryId || 1,
-    rating: product?.rating || 5,
+    categoryId: product?.categoryId || (validCategoryIds.length > 0 ? validCategoryIds[0] : 1),
     description: product?.description || '',
     image: product?.image || 'default-image-url.jpg',
   });
+  
+  const [errors, setErrors] = useState({});
 
+  const validateForm = () => {
+    const newErrors = {};
+    const { name, price, stock, categoryId } = formData;
+    
+    if (!name.trim()) newErrors.name = 'Product name cannot be empty.';
+    if (price < 0) newErrors.price = 'Price cannot be less than 0.';
+    
+    if (stock < 0) {
+      newErrors.stock = 'Stock cannot be less than 0.';
+    } else if (!Number.isInteger(stock)) {
+      newErrors.stock = 'Stock must be a whole number.';
+    }
+    
+    if (!Number.isInteger(categoryId) || categoryId <= 0) {
+        newErrors.categoryId = 'Category ID must be a valid positive integer.';
+    } else if (!validCategoryIds.includes(categoryId)) {
+        newErrors.categoryId = `Category ID is not exist.`;
+    } 
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+  
   const handleChange = (e) => {
     const { name, value, type } = e.target;
-    setFormData({ 
-      ...formData, 
-      [name]: type === 'number' ? Number(value) : value 
-    });
+    
+    const newValue = type === 'number' ? Number(value) : value;
+    setFormData(prev => ({ 
+      ...prev, 
+      [name]: newValue
+    }));
+    
+    let errorMessage = '';
+    
+    if (name === 'name' && !String(newValue).trim()) {
+      errorMessage = 'Product name cannot be empty.';
+    } else if (name === 'price' && newValue < 0) {
+      errorMessage = 'Price cannot be less than 0.';
+    } else if (name === 'stock') {
+      if (newValue < 0) {
+        errorMessage = 'Stock cannot be less than 0.';
+      } else if (!Number.isInteger(newValue) && String(newValue).indexOf('.') !== -1) {
+        errorMessage = 'Stock must be a whole number.';
+      }
+    } else if (name === 'categoryId') {
+        if (!Number.isInteger(newValue) || newValue <= 0) {
+            errorMessage = 'Category ID must be a valid positive integer.';
+        } else if (!validCategoryIds.includes(newValue)) {
+             errorMessage = `Category ID is not exist.`;
+        }
+    }
+    
+    setErrors(prev => ({ 
+        ...prev, 
+        [name]: errorMessage 
+    }));
   };
 
   const localHandleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    if (validateForm()) {
+      onSubmit(formData);
+    } else {
+        alert("Please check the fields with errors.");
+    }
   };
 
   return (
@@ -44,6 +99,7 @@ const ProductFormModal = ({ product, onSubmit, onClose }) => {
               onChange={handleChange}
               required
             />
+            {errors.name && <p className="error-message">{errors.name}</p>}
           </div>
           
           <div className="form-group">
@@ -57,6 +113,7 @@ const ProductFormModal = ({ product, onSubmit, onClose }) => {
               step="0.01"
               required
             />
+            {errors.price && <p className="error-message">{errors.price}</p>}
           </div>
           
           <div className="form-group">
@@ -69,6 +126,7 @@ const ProductFormModal = ({ product, onSubmit, onClose }) => {
               min="0"
               required
             />
+            {errors.stock && <p className="error-message">{errors.stock}</p>}
           </div>
 
           <div className="form-group">
@@ -79,6 +137,17 @@ const ProductFormModal = ({ product, onSubmit, onClose }) => {
               value={formData.categoryId}
               onChange={handleChange}
               required
+            />
+            {errors.categoryId && <p className="error-message">{errors.categoryId}</p>}
+          </div>
+          
+          <div className="form-group">
+            <label>Description</label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              rows="3"
             />
           </div>
           
@@ -106,15 +175,27 @@ const ProductFormModal = ({ product, onSubmit, onClose }) => {
   );
 };
 
-
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
+  const [validCategoryIds, setValidCategoryIds] = useState([]);
 
   useEffect(() => {
     loadProducts();
+    loadCategories();
   }, []);
+
+  const loadCategories = async () => {
+      try {
+          const response = await getCategories();
+          const ids = response.data.map(cat => Number(cat.id));
+          setValidCategoryIds(ids);
+      } catch (error) {
+          console.error('Failed to load categories for validation:', error);
+          setValidCategoryIds([]); 
+      }
+  };
 
   const loadProducts = async () => {
     try {
@@ -133,9 +214,18 @@ const Products = () => {
   const handleSubmit = async (productData) => {
     try {
       if (editingProduct) {
-        await updateProduct(editingProduct.id, productData);
+        const dataToUpdate = {
+            ...productData,
+            rating: editingProduct.rating, 
+        };
+        await updateProduct(editingProduct.id, dataToUpdate);
+
       } else {
-        await createProduct(productData);
+        const newProductData = {
+            ...productData,
+            rating: 5
+        }
+        await createProduct(newProductData);
       }
       
       handleCloseModal(); 
@@ -213,12 +303,13 @@ const Products = () => {
           </tbody>
         </table>
       </div>
- 
+ 
       {showModal && (
         <ProductFormModal
           product={editingProduct}
           onSubmit={handleSubmit}
           onClose={handleCloseModal}
+          validCategoryIds={validCategoryIds}
         />
       )}
     </div>
