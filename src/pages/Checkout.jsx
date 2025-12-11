@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { useShop } from '../context/ShopContext';
 import { createOrder } from '../services/api';
 import '../styles/Checkout.css';
 
 const Checkout = () => {
   const { cartItems, getCartTotal, clearCart } = useCart();
   const { user } = useAuth();
+  const { updateProductStock } = useShop();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: user?.name || '',
@@ -29,6 +31,7 @@ const Checkout = () => {
     e.preventDefault();
     
     try {
+      // Create order
       await createOrder({
         userId: user?.id,
         items: cartItems,
@@ -37,6 +40,30 @@ const Checkout = () => {
         date: new Date().toISOString(),
         shippingInfo: formData,
       });
+
+      // Update stock for each product
+      const { getProductById, updateProduct } = await import('../services/api');
+      for (const item of cartItems) {
+        try {
+          // Get current product data
+          const productRes = await getProductById(item.id);
+          const currentProduct = productRes.data;
+          
+          // Calculate new stock
+          const newStock = currentProduct.stock - item.quantity;
+          
+          // Update product with new stock in database
+          await updateProduct(item.id, {
+            ...currentProduct,
+            stock: newStock >= 0 ? newStock : 0
+          });
+
+          // Update product stock in ShopContext (real-time update)
+          updateProductStock(item.id, newStock >= 0 ? newStock : 0);
+        } catch (error) {
+          console.error(`Failed to update stock for product ${item.id}:`, error);
+        }
+      }
 
       clearCart();
       alert('Order placed successfully!');

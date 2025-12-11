@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { getWishlist, removeFromWishlist } from '../services/api';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useShop } from '../context/ShopContext';
+import { useWishlist } from '../context/WishlistContext';
 import { Link } from 'react-router-dom';
 import { FiTrash2, FiShoppingCart } from 'react-icons/fi';
 import '../styles/Wishlist.css';
@@ -11,41 +11,29 @@ const Wishlist = () => {
   const { user } = useAuth();
   const { products } = useShop();
   const { addToCart } = useCart();
-  const [wishlistItems, setWishlistItems] = useState([]);
+  const { wishlistItems: wishlistData, removeFromWishlist } = useWishlist();
+  const [wishlistProducts, setWishlistProducts] = useState([]);
 
   useEffect(() => {
-    if (user) {
-      loadWishlist();
-    }
-  }, [user]);
-
-  const loadWishlist = async () => {
-    try {
-      const response = await getWishlist(user.id);
-      const wishlistProducts = response.data.map(item => 
-        products.find(p => p.id === item.productId)
-      ).filter(Boolean);
-      setWishlistItems(wishlistProducts);
-    } catch (error) {
-      console.error('Failed to load wishlist:', error);
-    }
-  };
+    // Map wishlist items to actual products
+    const mappedProducts = wishlistData.map(item => 
+      products.find(p => p.id === item.productId)
+    ).filter(Boolean);
+    setWishlistProducts(mappedProducts);
+  }, [wishlistData, products]);
 
   const handleRemove = async (productId) => {
-    try {
-      // Find wishlist entry
-      const response = await getWishlist(user.id);
-      const entry = response.data.find(item => item.productId === productId);
-      if (entry) {
-        await removeFromWishlist(entry.id);
-        loadWishlist();
+    // Find wishlist entry
+    const entry = wishlistData.find(item => item.productId === productId);
+    if (entry) {
+      const result = await removeFromWishlist(entry.id);
+      if (result.success) {
+        // Product will be auto-removed from wishlistProducts via useEffect
       }
-    } catch (error) {
-      console.error('Failed to remove from wishlist:', error);
     }
   };
 
-  if (wishlistItems.length === 0) {
+  if (wishlistProducts.length === 0) {
     return (
       <div className="wishlist-empty">
         <h2>Your wishlist is empty</h2>
@@ -62,7 +50,7 @@ const Wishlist = () => {
         <h1>My Wishlist</h1>
 
         <div className="wishlist-grid">
-          {wishlistItems.map(product => (
+          {wishlistProducts.map(product => (
             <div key={product.id} className="wishlist-item">
               <Link to={`/product/${product.id}`}>
                 <img src={product.image} alt={product.name} />

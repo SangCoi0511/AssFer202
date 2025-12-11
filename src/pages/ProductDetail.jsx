@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { getProductById, getReviewsByProduct, createReview } from '../services/api';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { useWishlist } from '../context/WishlistContext';
 import { FiShoppingCart, FiHeart, FiStar } from 'react-icons/fi';
 import '../styles/ProductDetail.css';
 
@@ -14,7 +15,7 @@ const ProductDetail = () => {
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(5);
   const [loading, setLoading] = useState(true);
-  const { addToCart } = useCart();
+  const { addToCart, cartItems } = useCart();
   const { user } = useAuth();
 
   useEffect(() => {
@@ -53,25 +54,38 @@ const ProductDetail = () => {
   };
 
   const handleAddToCart = () => {
-    addToCart(product, quantity);
-  };
-
-  const handleAddToWishlist = async () => {
-    if (!user) {
-      alert('Please login to add items to wishlist');
+    // Check if product is in stock
+    if (product.stock <= 0) {
+      alert('This product is out of stock.');
       return;
     }
+    
+    // Check existing quantity in cart
+    const existingItem = cartItems.find(item => item.id === product.id);
+    const currentCartQuantity = existingItem ? existingItem.quantity : 0;
+    const totalQuantity = currentCartQuantity + quantity;
+    
+    // Check if total quantity exceeds stock
+    if (totalQuantity > product.stock) {
+      const availableToAdd = product.stock - currentCartQuantity;
+      if (availableToAdd <= 0) {
+        alert(`You already have maximum stock (${product.stock}) in your cart.`);
+      } else {
+        alert(`Cannot add ${quantity} items. You can only add ${availableToAdd} more (${currentCartQuantity} already in cart, ${product.stock} total stock).`);
+      }
+      return;
+    }
+    
+    addToCart(product, quantity);
+    alert('Added to cart successfully!');
+  };
 
-    try {
-      const { addToWishlist } = await import('../services/api');
-      await addToWishlist({
-        userId: user.id,
-        productId: Number(id),
-      });
+  const { addToWishlist: addToWishlistContext } = useWishlist();
+
+  const handleAddToWishlist = async () => {
+    const result = await addToWishlistContext(Number(id));
+    if (result.success) {
       alert('Added to wishlist!');
-    } catch (error) {
-      console.error('Failed to add to wishlist:', error);
-      alert('Failed to add to wishlist');
     }
   };
 

@@ -28,14 +28,14 @@
   ],
   "products": [
     {
-      "id": "1",
-      "name": "iPhone 13 Pro",
+      "name": "iPhone 13 Pro max",
       "price": 1099.99,
-      "categoryId": 1,
       "stock": 56,
+      "categoryId": 1,
       "rating": 4.12,
+      "description": "The iPhone 13 Pro is a cutting-edge smartphone with a powerful camera system, high-performance chip, and stunning display.",
       "image": "https://cdn.dummyjson.com/product-images/smartphones/iphone-13-pro/thumbnail.webp",
-      "description": "The iPhone 13 Pro is a cutting-edge smartphone with a powerful camera system, high-performance chip, and stunning display."
+      "id": "1"
     },
     {
       "id": "2",
@@ -62,7 +62,7 @@
       "name": "iPad Mini 2021 Starlight",
       "price": 499.99,
       "categoryId": 1,
-      "stock": 47,
+      "stock": 45,
       "rating": 3.18,
       "image": "https://cdn.dummyjson.com/product-images/tablets/ipad-mini-2021-starlight/thumbnail.webp",
       "description": "The iPad Mini 2021 in Starlight is a compact and powerful tablet from Apple with a stunning Retina display."
@@ -444,7 +444,7 @@
       "categoryId": 2,
       "stock": 6,
       "rating": 4.14,
-      "image": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-basketball-shoes/thumbnail.webp",
+      "image": "https://static.nike.com/a/images/f_auto/dpr_1.5,cs_srgb/h_1265,c_limit/0abdb42b-3702-484d-8c07-6fc876cd16dd/what-are-the-best-nike-basketball-shoes.jpg",
       "description": "The Nike Basketball Shoes are designed for performance on the court. They feature responsive cushioning and excellent traction."
     },
     {
@@ -464,7 +464,7 @@
       "categoryId": 2,
       "stock": 6,
       "rating": 3.19,
-      "image": "https://cdn.dummyjson.com/product-images/mens-shoes/sneakers-joggers-shoes/thumbnail.webp",
+      "image": "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1741716872-puma-foreverrun-nitro-2-67d07d7915584.jpg?crop=1xw:1xh;center,top&resize=980:*",
       "description": "The Sneakers Joggers Shoes are versatile and comfortable shoes for everyday wear. They are perfect for jogging, walking, or casual outings."
     },
     {
@@ -604,7 +604,7 @@
       "categoryId": 4,
       "stock": 60,
       "rating": 3.25,
-      "image": "https://cdn.dummyjson.com/product-images/sports-accessories/feathers-shuttlecock/thumbnail.webp",
+      "image": "https://www.directbadminton.co.uk/images/extralarge/yonas30.jpg",
       "description": "The Feathers Shuttlecock is a high-quality shuttlecock used in badminton. It features natural feathers for excellent flight stability."
     },
     {
@@ -684,7 +684,7 @@
       "categoryId": 5,
       "stock": 54,
       "rating": 4.05,
-      "image": "https://cdn.dummyjson.com/product-images/vehicle/dodge-charger-1970/thumbnail.webp",
+      "image": "https://i.ebayimg.com/images/g/30oAAeSw~l9pFn7C/s-l1600.webp",
       "description": "Detailed 1:18 scale die-cast model of the classic Dodge Charger 1970. Features opening doors and hood."
     },
     {
@@ -694,7 +694,7 @@
       "categoryId": 5,
       "stock": 69,
       "rating": 4.02,
-      "image": "https://cdn.dummyjson.com/product-images/vehicle/dodge-durango/thumbnail.webp",
+      "image": "hhttps://m.media-amazon.com/images/I/519ikCs4D+L._AC_SX300_SY300_QL70_FMwebp_.jpg",
       "description": "Remote control Dodge Durango monster truck. High speed and off-road capabilities for kids."
     },
     {
@@ -704,7 +704,7 @@
       "categoryId": 5,
       "stock": 28,
       "rating": 4.06,
-      "image": "https://cdn.dummyjson.com/product-images/vehicle/honda-civic/thumbnail.webp",
+      "image": "https://i.ebayimg.com/images/g/uYMAAOSwgmtkm4IZ/s-l960.webp",
       "description": "Build your own Honda Civic with this detailed plastic model kit. Paints and glue sold separately."
     },
     {
@@ -714,7 +714,7 @@
       "categoryId": 5,
       "stock": 49,
       "rating": 4.38,
-      "image": "https://cdn.dummyjson.com/product-images/vehicle/mercedes-benz-e-class/thumbnail.webp",
+      "image": "https://www.mykingdom.com.vn/cdn/shop/products/2349_01.jpg?v=1714727452&width=1100",
       "description": "Friction powered Mercedes-Benz E-Class toy car. Pull back and watch it go!"
     },
     {
@@ -724,7 +724,7 @@
       "categoryId": 5,
       "stock": 24,
       "rating": 4.3,
-      "image": "https://cdn.dummyjson.com/product-images/vehicle/nissan-gt-r/thumbnail.webp",
+      "image": "https://down-vn.img.susercontent.com/file/vn-11134207-7ra0g-m9g61clqijxq94@resize_w900_nl.webp",
       "description": "High performance RC drift car modeled after the Nissan GT-R. Includes drift tires and rechargeable battery."
     },
     {
@@ -826,16 +826,6 @@
       "id": "3d88",
       "userId": 1764674989332,
       "productId": 18
-    },
-    {
-      "id": "cbb1",
-      "userId": "1",
-      "productId": 1
-    },
-    {
-      "id": "6157",
-      "userId": "1",
-      "productId": 1
     }
   ],
   "reviews": [
@@ -920,6 +910,146 @@
       "total": 1099.98,
       "status": "pending",
       "date": "2025-12-08T14:49:24.712Z",
+      "shippingInfo": {
+        "name": "John Doe",
+        "email": "john@example.com",
+        "address": "456 User Avenue",
+        "city": "Thượng Phúc",
+        "zipCode": "06000",
+        "phone": "0359538518"
+      }
+    },
+    {
+      "id": "8a64",
+      "userId": "2",
+      "items": [
+        {
+          "id": "2",
+          "name": "Samsung Galaxy S10",
+          "price": 699.99,
+          "categoryId": 1,
+          "stock": 19,
+          "rating": 3.06,
+          "image": "https://cdn.dummyjson.com/product-images/smartphones/samsung-galaxy-s10/thumbnail.webp",
+          "description": "The Samsung Galaxy S10 is a flagship device featuring a dynamic AMOLED display, versatile camera system, and powerful performance.",
+          "quantity": 1
+        }
+      ],
+      "total": 699.99,
+      "status": "pending",
+      "date": "2025-12-10T06:53:30.139Z",
+      "shippingInfo": {
+        "name": "John Doe",
+        "email": "john@example.com",
+        "address": "456 User Avenue",
+        "city": "Thượng Phúc",
+        "zipCode": "06000",
+        "phone": "0359538518"
+      }
+    },
+    {
+      "id": "f64a",
+      "userId": "2",
+      "items": [
+        {
+          "id": "2",
+          "name": "Samsung Galaxy S10",
+          "price": 699.99,
+          "categoryId": 1,
+          "stock": 19,
+          "rating": 3.06,
+          "image": "https://cdn.dummyjson.com/product-images/smartphones/samsung-galaxy-s10/thumbnail.webp",
+          "description": "The Samsung Galaxy S10 is a flagship device featuring a dynamic AMOLED display, versatile camera system, and powerful performance.",
+          "quantity": 41
+        }
+      ],
+      "total": 28699.59,
+      "status": "pending",
+      "date": "2025-12-10T07:05:32.996Z",
+      "shippingInfo": {
+        "name": "John Doe",
+        "email": "john@example.com",
+        "address": "456 User Avenue",
+        "city": "Thượng Phúc",
+        "zipCode": "06000",
+        "phone": "0359538518"
+      }
+    },
+    {
+      "id": "1545",
+      "userId": "2",
+      "items": [
+        {
+          "id": "2",
+          "name": "Samsung Galaxy S10",
+          "price": 699.99,
+          "categoryId": 1,
+          "stock": 19,
+          "rating": 3.06,
+          "image": "https://cdn.dummyjson.com/product-images/smartphones/samsung-galaxy-s10/thumbnail.webp",
+          "description": "The Samsung Galaxy S10 is a flagship device featuring a dynamic AMOLED display, versatile camera system, and powerful performance.",
+          "quantity": 1
+        }
+      ],
+      "total": 699.99,
+      "status": "pending",
+      "date": "2025-12-10T07:07:28.346Z",
+      "shippingInfo": {
+        "name": "John Doe",
+        "email": "john@example.com",
+        "address": "456 User Avenue",
+        "city": "Thượng Phúc",
+        "zipCode": "06000",
+        "phone": "0359538518"
+      }
+    },
+    {
+      "id": "159e",
+      "userId": "2",
+      "items": [
+        {
+          "id": "4",
+          "name": "iPad Mini 2021 Starlight",
+          "price": 499.99,
+          "categoryId": 1,
+          "stock": 47,
+          "rating": 3.18,
+          "image": "https://cdn.dummyjson.com/product-images/tablets/ipad-mini-2021-starlight/thumbnail.webp",
+          "description": "The iPad Mini 2021 in Starlight is a compact and powerful tablet from Apple with a stunning Retina display.",
+          "quantity": 1
+        }
+      ],
+      "total": 499.99,
+      "status": "pending",
+      "date": "2025-12-10T07:10:33.550Z",
+      "shippingInfo": {
+        "name": "John Doe",
+        "email": "john@example.com",
+        "address": "456 User Avenue",
+        "city": "Thượng Phúc",
+        "zipCode": "06000",
+        "phone": "0359538518"
+      }
+    },
+    {
+      "id": "4b68",
+      "userId": "2",
+      "items": [
+        {
+          "id": "4",
+          "name": "iPad Mini 2021 Starlight",
+          "price": 499.99,
+          "categoryId": 1,
+          "stock": 46,
+          "rating": 3.18,
+          "image": "https://cdn.dummyjson.com/product-images/tablets/ipad-mini-2021-starlight/thumbnail.webp",
+          "description": "The iPad Mini 2021 in Starlight is a compact and powerful tablet from Apple with a stunning Retina display.",
+          "quantity": 1
+        }
+      ],
+      "total": 499.99,
+      "status": "pending",
+      "date": "2025-12-10T07:12:11.275Z",
       "shippingInfo": {
         "name": "John Doe",
         "email": "john@example.com",

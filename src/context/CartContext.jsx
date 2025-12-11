@@ -31,11 +31,23 @@ export const CartProvider = ({ children }) => {
       const existingItem = prevItems.find(item => item.id === product.id);
       
       if (existingItem) {
+        // Check if adding quantity exceeds stock
+        const newQuantity = existingItem.quantity + quantity;
+        if (newQuantity > product.stock) {
+          alert(`Cannot add more. Only ${product.stock} items available in stock.`);
+          return prevItems;
+        }
         return prevItems.map(item =>
           item.id === product.id
-            ? { ...item, quantity: item.quantity + quantity }
+            ? { ...item, quantity: newQuantity }
             : item
         );
+      }
+      
+      // Check stock for new item
+      if (quantity > product.stock) {
+        alert(`Cannot add ${quantity} items. Only ${product.stock} items available in stock.`);
+        return prevItems;
       }
       
       return [...prevItems, { ...product, quantity }];
@@ -53,9 +65,17 @@ export const CartProvider = ({ children }) => {
     }
     
     setCartItems(prevItems =>
-      prevItems.map(item =>
-        item.id === productId ? { ...item, quantity } : item
-      )
+      prevItems.map(item => {
+        if (item.id === productId) {
+          // Check if quantity exceeds stock
+          if (quantity > item.stock) {
+            alert(`Cannot add more. Only ${item.stock} items available in stock.`);
+            return item;
+          }
+          return { ...item, quantity };
+        }
+        return item;
+      })
     );
   };
 

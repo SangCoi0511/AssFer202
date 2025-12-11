@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { ShopProvider } from './context/ShopContext';
+import { WishlistProvider } from './context/WishlistContext';
 import AppRoutes from './routes/AppRoutes';
 import './App.css';
 
@@ -12,7 +13,9 @@ function App() {
       <AuthProvider>
         <CartProvider>
           <ShopProvider>
-            <AppRoutes />
+            <WishlistProvider>
+              <AppRoutes />
+            </WishlistProvider>
           </ShopProvider>
         </CartProvider>
       </AuthProvider>
