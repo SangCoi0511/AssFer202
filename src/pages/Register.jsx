@@ -3,77 +3,59 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import '../styles/Auth.css';
 
-// Validation functions
 const validateName = (name) => {
   const trimmed = name.trim();
-  if (!trimmed) {
-    return { valid: false, error: 'Name is required' };
-  }
-  if (trimmed.length < 2) {
-    return { valid: false, error: 'Name must be at least 2 characters' };
-  }
-  if (trimmed.length > 50) {
-    return { valid: false, error: 'Name must not exceed 50 characters' };
-  }
-  if (!/^[a-zA-Z\s'-]*$/.test(trimmed)) {
-    return { valid: false, error: 'Name can only contain letters, spaces, hyphens, and apostrophes' };
-  }
-  return { valid: true };
+  const errors = [];
+
+  if (!trimmed) errors.push('Name is required');
+  if (trimmed && trimmed.length < 2) errors.push('Name must be at least 2 characters');
+  if (trimmed.length > 50) errors.push('Name must not exceed 50 characters');
+  if (trimmed && !/^[a-zA-Z\s'-]*$/.test(trimmed)) errors.push('Name can only contain letters, spaces, hyphens, and apostrophes');
+
+  return { valid: errors.length === 0, errors };
 };
 
 const validateEmail = (email) => {
   const trimmed = email.trim();
-  if (!trimmed) {
-    return { valid: false, error: 'Email is required' };
-  }
+  const errors = [];
+
+  if (!trimmed) errors.push('Email is required');
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(trimmed)) {
-    return { valid: false, error: 'Invalid email format' };
-  }
-  return { valid: true };
+  if (trimmed && !emailRegex.test(trimmed)) errors.push('Invalid email format');
+
+  return { valid: errors.length === 0, errors };
 };
 
 const validatePassword = (password) => {
-  if (!password) {
-    return { valid: false, error: 'Password is required' };
-  }
-  if (password.length < 6) {
-    return { valid: false, error: 'Password must be at least 6 characters' };
-  }
-  if (password.length > 100) {
-    return { valid: false, error: 'Password must not exceed 100 characters' };
-  }
-  if (!/[A-Z]/.test(password)) {
-    return { valid: false, error: 'Password must contain at least one uppercase letter' };
-  }
-  if (!/[a-z]/.test(password)) {
-    return { valid: false, error: 'Password must contain at least one lowercase letter' };
-  }
-  if (!/[0-9]/.test(password)) {
-    return { valid: false, error: 'Password must contain at least one number' };
-  }
-  return { valid: true };
+  const errors = [];
+
+  if (!password) errors.push('Password is required');
+  if (password && password.length < 6) errors.push('Password must be at least 6 characters');
+  if (password && password.length > 100) errors.push('Password must not exceed 100 characters');
+  if (password && !/[A-Z]/.test(password)) errors.push('Password must contain at least one uppercase letter');
+  if (password && !/[a-z]/.test(password)) errors.push('Password must contain at least one lowercase letter');
+  if (password && !/[0-9]/.test(password)) errors.push('Password must contain at least one number');
+
+  return { valid: errors.length === 0, errors };
 };
 
 const validateConfirmPassword = (password, confirmPassword) => {
-  if (!confirmPassword) {
-    return { valid: false, error: 'Confirm password is required' };
-  }
-  if (password !== confirmPassword) {
-    return { valid: false, error: 'Passwords do not match' };
-  }
-  return { valid: true };
+  const errors = [];
+
+  if (!confirmPassword) errors.push('Confirm password is required');
+  if (confirmPassword && password !== confirmPassword) errors.push('Passwords do not match');
+
+  return { valid: errors.length === 0, errors };
 };
 
 const validateAddress = (address) => {
   const trimmed = address.trim();
-  if (trimmed && trimmed.length < 5) {
-    return { valid: false, error: 'Address must be at least 5 characters' };
-  }
-  if (trimmed.length > 100) {
-    return { valid: false, error: 'Address must not exceed 100 characters' };
-  }
-  return { valid: true };
+  const errors = [];
+
+  if (trimmed && trimmed.length < 5) errors.push('Address must be at least 5 characters');
+  if (trimmed.length > 100) errors.push('Address must not exceed 100 characters');
+
+  return { valid: errors.length === 0, errors };
 };
 
 const Register = () => {
@@ -85,7 +67,7 @@ const Register = () => {
     address: '',
   });
   const [fieldErrors, setFieldErrors] = useState({});
-  const [error, setError] = useState('');
+  const [formErrors, setFormErrors] = useState([]);
   const [loading, setLoading] = useState(false);
   const { register } = useAuth();
   const navigate = useNavigate();
@@ -109,7 +91,7 @@ const Register = () => {
         validation = validateAddress(value);
         break;
       default:
-        validation = { valid: true };
+        validation = { valid: true, errors: [] };
     }
     return validation;
   };
@@ -122,10 +104,10 @@ const Register = () => {
     });
 
     // Clear error for this field when user starts typing
-    if (fieldErrors[name]) {
+    if (fieldErrors[name]?.length) {
       setFieldErrors({
         ...fieldErrors,
-        [name]: '',
+        [name]: [],
       });
     }
   };
@@ -134,17 +116,15 @@ const Register = () => {
     const { name, value } = e.target;
     const validation = validateField(name, value);
     
-    if (!validation.valid) {
-      setFieldErrors({
-        ...fieldErrors,
-        [name]: validation.error,
-      });
-    }
+    setFieldErrors({
+      ...fieldErrors,
+      [name]: validation.errors,
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setFormErrors([]);
     setFieldErrors({});
 
     // Validate all fields
@@ -155,15 +135,19 @@ const Register = () => {
     const addressValidation = validateAddress(formData.address);
 
     const errors = {};
-    if (!nameValidation.valid) errors.name = nameValidation.error;
-    if (!emailValidation.valid) errors.email = emailValidation.error;
-    if (!passwordValidation.valid) errors.password = passwordValidation.error;
-    if (!confirmPasswordValidation.valid) errors.confirmPassword = confirmPasswordValidation.error;
-    if (!addressValidation.valid) errors.address = addressValidation.error;
+    if (!nameValidation.valid) errors.name = nameValidation.errors;
+    if (!emailValidation.valid) errors.email = emailValidation.errors;
+    if (!passwordValidation.valid) errors.password = passwordValidation.errors;
+    if (!confirmPasswordValidation.valid) errors.confirmPassword = confirmPasswordValidation.errors;
+    if (!addressValidation.valid) errors.address = addressValidation.errors;
 
-    if (Object.keys(errors).length > 0) {
+    const flatErrors = Object.entries(errors).flatMap(([field, msgs]) =>
+      (msgs || []).map(msg => `${field === 'confirmPassword' ? 'Confirm password' : field.charAt(0).toUpperCase() + field.slice(1)}: ${msg}`)
+    );
+
+    if (flatErrors.length > 0) {
       setFieldErrors(errors);
-      setError('Please fix the errors below');
+      setFormErrors(flatErrors);
       return;
     }
 
@@ -174,7 +158,7 @@ const Register = () => {
     if (result.success) {
       navigate('/');
     } else {
-      setError(result.error);
+      setFormErrors([result.error]);
     }
     
     setLoading(false);
@@ -186,9 +170,8 @@ const Register = () => {
         <h2>Create Account</h2>
         <p className="subtitle">Join MiniShop today</p>
 
-        {error && <div className="error-message">{error}</div>}
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} noValidate>
           <div className="form-group">
             <label>Name <span className="required">*</span></label>
             <input
@@ -199,9 +182,11 @@ const Register = () => {
               onBlur={handleBlur}
               required
               placeholder="Enter your full name"
-              className={fieldErrors.name ? 'input-error' : ''}
+              className={fieldErrors.name?.length ? 'input-error' : ''}
             />
-            {fieldErrors.name && <span className="field-error">{fieldErrors.name}</span>}
+              {fieldErrors.name?.length > 0 && fieldErrors.name.map((msg, idx) => (
+                <span key={idx} className="field-error">{msg}</span>
+              ))}
           </div>
 
           <div className="form-group">
@@ -214,9 +199,11 @@ const Register = () => {
               onBlur={handleBlur}
               required
               placeholder="Enter your email"
-              className={fieldErrors.email ? 'input-error' : ''}
+              className={fieldErrors.email?.length ? 'input-error' : ''}
             />
-            {fieldErrors.email && <span className="field-error">{fieldErrors.email}</span>}
+              {fieldErrors.email?.length > 0 && fieldErrors.email.map((msg, idx) => (
+                <span key={idx} className="field-error">{msg}</span>
+              ))}
           </div>
 
           <div className="form-group">
@@ -229,9 +216,11 @@ const Register = () => {
               onBlur={handleBlur}
               required
               placeholder="Minimum 6 characters with uppercase, lowercase & number"
-              className={fieldErrors.password ? 'input-error' : ''}
+              className={fieldErrors.password?.length ? 'input-error' : ''}
             />
-            {fieldErrors.password && <span className="field-error">{fieldErrors.password}</span>}
+              {fieldErrors.password?.length > 0 && fieldErrors.password.map((msg, idx) => (
+                <span key={idx} className="field-error">{msg}</span>
+              ))}
             <p className="password-hint">Password must contain: uppercase letter, lowercase letter, and number</p>
           </div>
 
@@ -245,9 +234,11 @@ const Register = () => {
               onBlur={handleBlur}
               required
               placeholder="Confirm your password"
-              className={fieldErrors.confirmPassword ? 'input-error' : ''}
+              className={fieldErrors.confirmPassword?.length ? 'input-error' : ''}
             />
-            {fieldErrors.confirmPassword && <span className="field-error">{fieldErrors.confirmPassword}</span>}
+              {fieldErrors.confirmPassword?.length > 0 && fieldErrors.confirmPassword.map((msg, idx) => (
+                <span key={idx} className="field-error">{msg}</span>
+              ))}
           </div>
 
           <div className="form-group">
@@ -259,9 +250,11 @@ const Register = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               placeholder="Enter your address (5-100 characters)"
-              className={fieldErrors.address ? 'input-error' : ''}
+              className={fieldErrors.address?.length ? 'input-error' : ''}
             />
-            {fieldErrors.address && <span className="field-error">{fieldErrors.address}</span>}
+              {fieldErrors.address?.length > 0 && fieldErrors.address.map((msg, idx) => (
+                <span key={idx} className="field-error">{msg}</span>
+              ))}
           </div>
 
           <button type="submit" className="btn-primary" disabled={loading}>
