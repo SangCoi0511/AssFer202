@@ -29,9 +29,11 @@
 .error-message {
   background: #fee2e2;
   color: #dc2626;
-  padding: 0.75rem;
+  padding: 0.75rem 1rem;
   border-radius: 8px;
   margin-bottom: 1rem;
+  border-left: 4px solid #dc2626;
+  font-weight: 500;
 }
 
 .form-group {
@@ -45,15 +47,27 @@
   color: var(--text);
 }
 
+.required {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.optional {
+  color: #a0aec0;
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
 .form-group input,
 .form-group textarea,
 .form-group select {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   border-radius: 8px;
   font-size: 1rem;
-  transition: border 0.3s;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
 }
 
 .form-group input:focus,
@@ -61,6 +75,37 @@
 .form-group select:focus {
   outline: none;
   border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group input.input-error,
+.form-group textarea.input-error,
+.form-group select.input-error {
+  border-color: #dc2626;
+  background-color: #fff5f5;
+}
+
+.form-group input.input-error:focus,
+.form-group textarea.input-error:focus,
+.form-group select.input-error:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.field-error {
+  display: block;
+  color: #dc2626;
+  font-size: 0.85rem;
+  margin-top: 0.35rem;
+  font-weight: 500;
+}
+
+.password-hint {
+  font-size: 0.8rem;
+  color: #a0aec0;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  font-style: italic;
 }
 
 .auth-footer {
@@ -73,6 +118,12 @@
   color: var(--primary);
   text-decoration: none;
   font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.auth-footer a:hover {
+  color: #5568d3;
+  text-decoration: underline;
 }
 
 .demo-credentials {
