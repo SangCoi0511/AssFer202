@@ -789,11 +789,11 @@
     },
     {
       "id": "2",
-      "name": "John Doe",
+      "name": "john doe",
       "email": "john@example.com",
       "password": "user123",
       "role": "user",
-      "address": "456 User Avenue"
+      "address": "ahbahkf"
     }
   ],
   "wishlist": [
@@ -836,6 +836,16 @@
       "id": "6157",
       "userId": "1",
       "productId": 1
+    },
+    {
+      "id": "3e35",
+      "userId": "1",
+      "productId": "2"
+    },
+    {
+      "id": "62a2",
+      "userId": "2",
+      "productId": "2"
     }
   ],
   "reviews": [
