@@ -15,12 +15,13 @@ export const ShopProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+
   const [filters, setFilters] = useState({
     categoryId: null,
     priceRange: [0, 1000],
     minRating: 0,
     searchQuery: '',
-    sortBy: 'default', // default, price-asc, price-desc, rating
+    sortBy: 'default',
   });
 
   useEffect(() => {
@@ -34,6 +35,7 @@ export const ShopProvider = ({ children }) => {
         getProducts(),
         getCategories(),
       ]);
+
       setProducts(productsRes.data);
       setCategories(categoriesRes.data);
     } catch (error) {
@@ -46,31 +48,36 @@ export const ShopProvider = ({ children }) => {
   const getFilteredProducts = () => {
     let filtered = [...products];
 
-    // Filter by category
-    if (filters.categoryId) {
-      filtered = filtered.filter(p => p.categoryId === filters.categoryId);
-    }
-
-    // Filter by price range
-    filtered = filtered.filter(
-      p => p.price >= filters.priceRange[0] && p.price <= filters.priceRange[1]
-    );
-
-    // Filter by rating
-    if (filters.minRating > 0) {
-      filtered = filtered.filter(p => p.rating >= filters.minRating);
-    }
-
-    // Filter by search query
-    if (filters.searchQuery) {
-      const query = filters.searchQuery.toLowerCase();
-      filtered = filtered.filter(p =>
-        p.name.toLowerCase().includes(query) ||
-        p.description.toLowerCase().includes(query)
+    // FIXED CATEGORY FILTER (convert both to Number)
+    if (filters.categoryId !== null) {
+      filtered = filtered.filter(
+        (p) => Number(p.categoryId) === Number(filters.categoryId)
       );
     }
 
-    // Sort products
+    // Price range filter
+    filtered = filtered.filter(
+      (p) =>
+        p.price >= filters.priceRange[0] &&
+        p.price <= filters.priceRange[1]
+    );
+
+    // Rating filter
+    if (filters.minRating > 0) {
+      filtered = filtered.filter((p) => p.rating >= filters.minRating);
+    }
+
+    // Search filter
+    if (filters.searchQuery.trim()) {
+      const query = filters.searchQuery.toLowerCase();
+      filtered = filtered.filter(
+        (p) =>
+          p.name.toLowerCase().includes(query) ||
+          p.description.toLowerCase().includes(query)
+      );
+    }
+
+    // Sorting
     switch (filters.sortBy) {
       case 'price-asc':
         filtered.sort((a, b) => a.price - b.price);
@@ -89,7 +96,7 @@ export const ShopProvider = ({ children }) => {
   };
 
   const updateFilters = (newFilters) => {
-    setFilters(prev => ({ ...prev, ...newFilters }));
+    setFilters((prev) => ({ ...prev, ...newFilters }));
   };
 
   const resetFilters = () => {
@@ -124,5 +131,9 @@ export const ShopProvider = ({ children }) => {
     updateProductStock,
   };
 
-  return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
+  return (
+    <ShopContext.Provider value={value}>
+      {children}
+    </ShopContext.Provider>
+  );
 };

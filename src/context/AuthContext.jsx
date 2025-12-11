@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check for existing session
+    // Load existing session
     const savedUser = localStorage.getItem('user');
     if (savedUser) {
       setUser(JSON.parse(savedUser));
@@ -24,44 +24,50 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
+  // ============================
+  // LOGIN
+  // ============================
   const login = async (email, password) => {
     try {
       const response = await getUserByEmail(email);
       const foundUser = response.data.find(u => u.password === password);
-      
+
       if (foundUser) {
         const { password, ...userWithoutPassword } = foundUser;
         setUser(userWithoutPassword);
         localStorage.setItem('user', JSON.stringify(userWithoutPassword));
+
         return { success: true, user: userWithoutPassword };
       }
+
       return { success: false, error: 'Invalid credentials' };
     } catch (error) {
       return { success: false, error: 'Login failed' };
     }
   };
 
+  // ============================
+  // REGISTER
+  // ============================
   const register = async (userData) => {
     try {
-      // Check if email already exists
       const response = await getUserByEmail(userData.email);
       if (response.data.length > 0) {
         return { success: false, error: 'Email already exists' };
       }
 
-      // Create new user
       const newUser = {
         ...userData,
         role: 'user',
-        id: Date.now(), // Simple ID generation
+        id: Date.now(),
       };
 
-      // Save user to database
       await createUser(newUser);
 
       const { password, ...userWithoutPassword } = newUser;
       setUser(userWithoutPassword);
       localStorage.setItem('user', JSON.stringify(userWithoutPassword));
+
       return { success: true, user: userWithoutPassword };
     } catch (error) {
       console.error('Registration error:', error);
@@ -69,6 +75,20 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // ============================
+  // UPDATE USER (Profile update)
+  // ============================
+  const updateUser = (updatedUser) => {
+    // Đảm bảo không lưu password vào localStorage
+    const { password, ...userWithoutPassword } = updatedUser;
+
+    setUser(userWithoutPassword);
+    localStorage.setItem('user', JSON.stringify(userWithoutPassword));
+  };
+
+  // ============================
+  // LOGOUT
+  // ============================
   const logout = () => {
     setUser(null);
     localStorage.removeItem('user');
@@ -84,7 +104,12 @@ export const AuthProvider = ({ children }) => {
     logout,
     isAdmin,
     isAuthenticated: !!user,
+    updateUser,   // <-- thêm vào context
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
