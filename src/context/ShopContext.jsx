@@ -109,6 +109,16 @@ export const ShopProvider = ({ children }) => {
     });
   };
 
+  const updateProductStock = (productId, newStock) => {
+    setProducts(prevProducts =>
+      prevProducts.map(product =>
+        product.id === productId
+          ? { ...product, stock: newStock }
+          : product
+      )
+    );
+  };
+
   const value = {
     products,
     categories,
@@ -118,6 +128,7 @@ export const ShopProvider = ({ children }) => {
     resetFilters,
     getFilteredProducts,
     refreshProducts: loadData,
+    updateProductStock,
   };
 
   return (

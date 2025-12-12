@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useShop } from '../context/ShopContext';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
-import { addToWishlist } from '../services/api';
+import { useWishlist } from '../context/WishlistContext';
 import { FiHeart, FiShoppingCart, FiStar } from 'react-icons/fi';
 import '../styles/Shop.css';
 
@@ -11,6 +11,7 @@ const Shop = () => {
   const { getFilteredProducts, categories, filters, updateFilters, loading } = useShop();
   const { addToCart } = useCart();
   const { user } = useAuth();
+  const { addToWishlist: addToWishlistContext, isInWishlist } = useWishlist();
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [displayCount, setDisplayCount] = useState(30);
@@ -25,21 +26,9 @@ const Shop = () => {
   };
 
   const handleAddToWishlist = async (product) => {
-    if (!user) {
-      alert('Please login to add items to wishlist');
-      return;
-    }
-
-    try {
-      await addToWishlist({
-        userId: user.id,
-        productId: product.id,
-      });
-
+    const result = await addToWishlistContext(product.id);
+    if (result.success) {
       alert('Added to wishlist!');
-    } catch (error) {
-      console.error('Failed to add to wishlist:', error);
-      alert('Failed to add to wishlist');
     }
   };
 

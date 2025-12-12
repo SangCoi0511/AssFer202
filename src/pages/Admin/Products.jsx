@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getProducts, deleteProduct, createProduct, updateProduct } from '../../services/api';
+import { getProducts, deleteProduct, createProduct, updateProduct, getCategories } from '../../services/api';
+import { useShop } from '../../context/ShopContext';
 import { FiEdit, FiTrash2, FiPlus } from 'react-icons/fi';
 import '../../styles/Admin.css';
 
@@ -10,11 +11,27 @@ const ProductFormModal = ({ product, onSubmit, onClose }) => {
     name: product?.name || '',
     price: product?.price || 0,
     stock: product?.stock || 0,
-    categoryId: product?.categoryId || 1,
+    categoryId: product?.categoryId || '',
     rating: product?.rating || 5,
     description: product?.description || '',
     image: product?.image || 'default-image-url.jpg',
   });
+
+  const [errors, setErrors] = useState({});
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    loadCategories();
+  }, []);
+
+  const loadCategories = async () => {
+    try {
+      const response = await getCategories();
+      setCategories(response.data);
+    } catch (error) {
+      console.error('Failed to load categories:', error);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
@@ -22,10 +39,45 @@ const ProductFormModal = ({ product, onSubmit, onClose }) => {
       ...formData, 
       [name]: type === 'number' ? Number(value) : value 
     });
+    
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors({ ...errors, [name]: '' });
+    }
   };
 
   const localHandleSubmit = (e) => {
     e.preventDefault();
+    
+    // Collect all validation errors
+    const newErrors = {};
+    
+    if (!formData.name || formData.name.trim() === '') {
+      newErrors.name = 'Name is required';
+    }
+    
+    if (formData.price <= 0) {
+      newErrors.price = 'Price must be greater than 0';
+    }
+    
+    if (formData.stock < 0) {
+      newErrors.stock = 'Stock cannot be negative';
+    }
+    
+    if (!formData.categoryId || formData.categoryId === '') {
+      newErrors.categoryId = 'Please select a category';
+    }
+    
+    if (!formData.image || formData.image.trim() === '') {
+      newErrors.image = 'Image URL is required';
+    }
+    
+    // If there are errors, set them and stop
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+    
     onSubmit(formData);
   };
 
@@ -33,7 +85,7 @@ const ProductFormModal = ({ product, onSubmit, onClose }) => {
     <div className="modal-overlay">
       <div className="modal-content">
         <h2>{isEditing ? 'Edit Product' : 'Add New Product'}</h2>
-        <form onSubmit={localHandleSubmit}>
+        <form onSubmit={localHandleSubmit} noValidate>
           
           <div className="form-group">
             <label>Name</label>
@@ -42,8 +94,9 @@ const ProductFormModal = ({ product, onSubmit, onClose }) => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              required
+              className={errors.name ? 'error' : ''}
             />
+            {errors.name && <span className="error-message">{errors.name}</span>}
           </div>
           
           <div className="form-group">
@@ -53,10 +106,11 @@ const ProductFormModal = ({ product, onSubmit, onClose }) => {
               name="price"
               value={formData.price}
               onChange={handleChange}
-              min="0"
+              min="0.01"
               step="0.01"
-              required
+              className={errors.price ? 'error' : ''}
             />
+            {errors.price && <span className="error-message">{errors.price}</span>}
           </div>
           
           <div className="form-group">
@@ -67,19 +121,27 @@ const ProductFormModal = ({ product, onSubmit, onClose }) => {
               value={formData.stock}
               onChange={handleChange}
               min="0"
-              required
+              className={errors.stock ? 'error' : ''}
             />
+            {errors.stock && <span className="error-message">{errors.stock}</span>}
           </div>
 
           <div className="form-group">
-            <label>Category ID</label>
-            <input
-              type="number"
+            <label>Category</label>
+            <select
               name="categoryId"
               value={formData.categoryId}
               onChange={handleChange}
-              required
-            />
+              className={errors.categoryId ? 'error' : ''}
+            >
+              <option value="">Select a category</option>
+              {categories.map(category => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+            {errors.categoryId && <span className="error-message">{errors.categoryId}</span>}
           </div>
           
           <div className="form-group">
@@ -89,7 +151,21 @@ const ProductFormModal = ({ product, onSubmit, onClose }) => {
               name="image"
               value={formData.image}
               onChange={handleChange}
+              className={errors.image ? 'error' : ''}
             />
+            {errors.image && <span className="error-message">{errors.image}</span>}
+          </div>
+
+          <div className="form-group">
+            <label>Description</label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              rows="3"
+              className={errors.description ? 'error' : ''}
+            />
+            {errors.description && <span className="error-message">{errors.description}</span>}
           </div>
 
           <div className="form-actions">
@@ -111,6 +187,7 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
+  const { refreshProducts } = useShop();
 
   useEffect(() => {
     loadProducts();
@@ -135,11 +212,25 @@ const Products = () => {
       if (editingProduct) {
         await updateProduct(editingProduct.id, productData);
       } else {
-        await createProduct(productData);
+        // Generate auto-increment ID for new product
+        const maxId = products.reduce((max, product) => {
+          const numId = parseInt(product.id);
+          return !isNaN(numId) && numId > max ? numId : max;
+        }, 0);
+        
+        const newProductData = {
+          ...productData,
+          id: String(maxId + 1)
+        };
+        
+        await createProduct(newProductData);
       }
       
       handleCloseModal(); 
-      loadProducts(); 
+      loadProducts();
+      
+      // Refresh products in ShopContext so Shop page updates
+      refreshProducts();
       
     } catch (error) {
       console.error('Failed to save product:', error);
@@ -152,6 +243,9 @@ const Products = () => {
       try {
         await deleteProduct(id);
         loadProducts();
+        
+        // Refresh products in ShopContext so Shop page updates
+        refreshProducts();
       } catch (error) {
         console.error('Failed to delete product:', error);
       }
