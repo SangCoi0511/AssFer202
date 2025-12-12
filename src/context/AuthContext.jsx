@@ -30,7 +30,9 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+
     // Check for existing session với safeParseJSON
+
     const savedUser = localStorage.getItem('user');
     const parsedUser = safeParseJSON(savedUser, null);
     
@@ -40,6 +42,7 @@ export const AuthProvider = ({ children }) => {
     }
     setLoading(false);
   }, []);
+
 
   // Hàm xử lý merge cart từ guest sang user (chỉ gọi khi đăng nhập)
   const handleGuestCartMerge = async (userId, guestCartItems) => {
@@ -72,18 +75,20 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+
   const login = async (email, password) => {
     try {
       console.log('🔐 Login attempt for:', email);
       const response = await getUserByEmail(email);
       const foundUser = response.data.find(u => u.password === password);
-      
+
       if (foundUser) {
         const { password, ...userWithoutPassword } = foundUser;
         
         // Lưu user vào state và localStorage
         setUser(userWithoutPassword);
         localStorage.setItem('user', JSON.stringify(userWithoutPassword));
+
         
         console.log('✅ Login successful for user:', userWithoutPassword.id);
         
@@ -100,6 +105,7 @@ export const AuthProvider = ({ children }) => {
       }
       
       console.log('❌ Invalid credentials for:', email);
+
       return { success: false, error: 'Invalid credentials' };
       
     } catch (error) {
@@ -108,27 +114,30 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // ============================
+  // REGISTER
+  // ============================
   const register = async (userData) => {
     try {
-      // Check if email already exists
       const response = await getUserByEmail(userData.email);
       if (response.data.length > 0) {
         return { success: false, error: 'Email already exists' };
       }
 
-      // Create new user
       const newUser = {
         ...userData,
         role: 'user',
+
         id: Date.now().toString(),
+
       };
 
-      // Save user to database
       await createUser(newUser);
 
       const { password, ...userWithoutPassword } = newUser;
       setUser(userWithoutPassword);
       localStorage.setItem('user', JSON.stringify(userWithoutPassword));
+
       
       console.log('✅ Registration successful for user:', newUser.id);
       
@@ -141,6 +150,7 @@ export const AuthProvider = ({ children }) => {
         await handleGuestCartMerge(newUser.id, parsedGuestCart);
       }
       
+
       return { success: true, user: userWithoutPassword };
     } catch (error) {
       console.error('❌ Registration error:', error);
@@ -148,6 +158,20 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // ============================
+  // UPDATE USER (Profile update)
+  // ============================
+  const updateUser = (updatedUser) => {
+    // Đảm bảo không lưu password vào localStorage
+    const { password, ...userWithoutPassword } = updatedUser;
+
+    setUser(userWithoutPassword);
+    localStorage.setItem('user', JSON.stringify(userWithoutPassword));
+  };
+
+  // ============================
+  // LOGOUT
+  // ============================
   const logout = () => {
     console.log('🚪 Logging out user:', user?.id);
     
@@ -173,7 +197,10 @@ export const AuthProvider = ({ children }) => {
     logout,
     isAdmin,
     isAuthenticated: !!user,
+    updateUser,   // <-- thêm vào context
   };
+
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
+
