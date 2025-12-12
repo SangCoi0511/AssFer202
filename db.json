@@ -794,6 +794,14 @@
       "password": "user123",
       "role": "user",
       "address": "456 User Avenue"
+    },
+    {
+      "id": 1765536630258,
+      "name": "da",
+      "email": "daioceanratmdasau@gmail.com",
+      "password": "123",
+      "address": "123",
+      "role": "user"
     }
   ],
   "wishlist": [
@@ -888,7 +896,32 @@
       "date": "2025-12-05T08:40:15.234Z"
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "id": "cart-1765536630258-1765536900343",
+      "userId": 1765536630258,
+      "items": [
+        {
+          "productId": "6",
+          "quantity": 1
+        },
+        {
+          "productId": "7",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "cart-1765536630258-1765536900343",
+      "userId": 1765536630258,
+      "items": [
+        {
+          "productId": "3",
+          "quantity": 1
+        }
+      ]
+    }
+  ],
   "orders": [
     {
       "id": "1cf8",
