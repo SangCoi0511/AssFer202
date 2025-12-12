@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { getWishlist, addToWishlist as apiAddToWishlist, removeFromWishlist as apiRemoveFromWishlist } from '../services/api';
+import { getWishlistByUser, addToWishlist as apiAddToWishlist, removeFromWishlist as apiRemoveFromWishlist } from '../services/api';
 import { useAuth } from './AuthContext';
 
 const WishlistContext = createContext();
@@ -30,7 +30,7 @@ export const WishlistProvider = ({ children }) => {
     
     try {
       setLoading(true);
-      const response = await getWishlist(user.id);
+      const response = await getWishlistByUser(user.id);
       setWishlistItems(response.data);
     } catch (error) {
       console.error('Failed to load wishlist:', error);
@@ -47,7 +47,7 @@ export const WishlistProvider = ({ children }) => {
 
     try {
       // Check if already in wishlist
-      const exists = wishlistItems.find(item => item.productId === productId);
+      const exists = wishlistItems.find(item => item.productId == productId);
       if (exists) {
         alert('Product already in wishlist');
         return { success: false };
@@ -78,7 +78,7 @@ export const WishlistProvider = ({ children }) => {
   };
 
   const isInWishlist = (productId) => {
-    return wishlistItems.some(item => item.productId === productId);
+    return wishlistItems.some(item => item.productId == productId);
   };
 
   const getWishlistCount = () => {

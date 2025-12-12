@@ -17,7 +17,7 @@ const Wishlist = () => {
   useEffect(() => {
     // Map wishlist items to actual products
     const mappedProducts = wishlistData.map(item => 
-      products.find(p => p.id === item.productId)
+      products.find(p => p.id == item.productId)
     ).filter(Boolean);
     setWishlistProducts(mappedProducts);
   }, [wishlistData, products]);

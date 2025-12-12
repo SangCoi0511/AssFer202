@@ -793,7 +793,7 @@
       "email": "john@example.com",
       "password": "user123",
       "role": "user",
-      "address": "ahbahkf"
+      "address": "456 User Avenue"
     }
   ],
   "wishlist": [
@@ -828,24 +828,14 @@
       "productId": 18
     },
     {
-      "id": "cbb1",
-      "userId": "1",
-      "productId": 1
-    },
-    {
-      "id": "6157",
-      "userId": "1",
-      "productId": 1
-    },
-    {
-      "id": "3e35",
-      "userId": "1",
-      "productId": "2"
-    },
-    {
-      "id": "62a2",
+      "id": "6735",
       "userId": "2",
       "productId": "2"
+    },
+    {
+      "id": "635b",
+      "userId": "2",
+      "productId": 3
     }
   ],
   "reviews": [
@@ -853,43 +843,30 @@
       "id": "f029",
       "productId": 1,
       "userId": 1764674989332,
-      "productId": 2
+      "rating": 5,
+      "comment": "Amazing sound quality! The noise cancellation is incredible and battery life is exactly as advertised.",
+      "date": "2025-11-15T10:20:30.697Z"
     },
     {
-      "id": "9c21",
+      "id": "673d",
+      "productId": 2,
       "userId": 1764674989332,
-      "productId": 13
+      "rating": 5,
+      "comment": "Best smartwatch I've ever owned. The health tracking features are accurate and the display is gorgeous.",
+      "date": "2025-11-20T14:45:12.030Z"
     },
     {
-      "id": "7f45",
+      "id": "a4b2",
+      "productId": 8,
       "userId": 1764674989332,
-      "productId": 22
+      "rating": 5,
+      "comment": "The leather quality is top-notch! Fits perfectly and looks incredibly stylish. Worth every penny.",
+      "date": "2025-11-25T09:15:45.123Z"
     },
     {
-      "id": "3d88",
+      "id": "e8c9",
+      "productId": 13,
       "userId": 1764674989332,
-      "productId": 18
-    },
-    {
-      "id": "cbb1",
-      "userId": "1",
-      "productId": 1
-    },
-    {
-      "id": "6157",
-      "userId": "1",
-      "productId": 1
-    },
-    {
-      "id": "3e35",
-      "userId": "1",
-      "productId": "2"
-    },
-    {
-      "id": "62a2",
-      "userId": "2",
-      "productId": "2",
- 
       "rating": 4,
       "comment": "Great air fryer! Cooks food evenly and quickly. The only downside is it's a bit bulky on the counter.",
       "date": "2025-11-28T16:30:22.456Z"
@@ -913,25 +890,16 @@
   ],
   "cart": [
     {
-      "id": "cart-1765536630258-1765536900343",
-      "userId": 1765536630258,
-      "items": [
-        {
-          "productId": "6",
-          "quantity": 1
-        },
-        {
-          "productId": "7",
-          "quantity": 1
-        }
-      ]
+      "id": "cart-2-1765560895419",
+      "userId": "2",
+      "items": []
     },
     {
-      "id": "cart-1765536630258-1765536900343",
-      "userId": 1765536630258,
+      "id": "cart-2-1765560895420",
+      "userId": "2",
       "items": [
         {
-          "productId": "3",
+          "productId": "2",
           "quantity": 1
         }
       ]
@@ -966,7 +934,7 @@
         }
       ],
       "total": 1099.98,
-      "status": "pending",
+      "status": "shipped",
       "date": "2025-12-08T14:49:24.712Z",
       "shippingInfo": {
         "name": "John Doe",
@@ -1022,7 +990,7 @@
         }
       ],
       "total": 28699.59,
-      "status": "pending",
+      "status": "delivered",
       "date": "2025-12-10T07:05:32.996Z",
       "shippingInfo": {
         "name": "John Doe",

@@ -150,15 +150,32 @@ export const CartProvider = ({ children }) => {
       const existingItemIndex = prevItems.findIndex(item => item.productId == product.id);
       let newItems;
       
-      if (existingItem) {
-        return prevItems.map(item =>
-          item.id === product.id
+      if (existingItemIndex > -1) {
+        // Cập nhật số lượng nếu sản phẩm đã có
+        newItems = prevItems.map((item, index) => 
+          index === existingItemIndex 
             ? { ...item, quantity: item.quantity + quantity }
             : item
         );
+      } else {
+        // Thêm sản phẩm mới
+        newItems = [...prevItems, { productId: product.id, quantity }];
       }
       
-      return [...prevItems, { ...product, quantity }];
+      console.log('🛒 [CartContext] New items after add:', newItems);
+      
+      // Gọi syncCart sau khi state được cập nhật
+      setTimeout(async () => {
+        try {
+          await syncCart(newItems);
+        } catch (error) {
+          console.error('Error syncing after add:', error);
+        } finally {
+          setIsSyncing(false);
+        }
+      }, 0);
+      
+      return newItems;
     });
   };
 
@@ -192,17 +209,49 @@ export const CartProvider = ({ children }) => {
     
     setIsSyncing(true);
     
-    setCartItems(prevItems =>
-      prevItems.map(item =>
-        item.id === productId ? { ...item, quantity } : item
-      )
-    );
+    setCartItems(prevItems => {
+      const newItems = prevItems.map(item =>
+        item.productId == productId 
+          ? { ...item, quantity: Math.max(1, quantity) }
+          : item
+      );
+      
+      console.log('🛒 [CartContext] New items after update:', newItems);
+      
+      setTimeout(async () => {
+        try {
+          await syncCart(newItems);
+        } catch (error) {
+          console.error('Error syncing after update:', error);
+        } finally {
+          setIsSyncing(false);
+        }
+      }, 0);
+      
+      return newItems;
+    });
   };
 
-  const clearCart = () => {
-    setCartItems([]);
+  const clearCart = async () => {
+    try {
+      setIsSyncing(true);
+      setCartItems([]);
+      
+      if (user) {
+        await cartService.deleteCart(user.id);
+        localStorage.removeItem(`cart_${user.id}`);
+      } else {
+        localStorage.removeItem('guest_cart');
+      }
+      
+    } catch (error) {
+      console.error('Error clearing cart:', error);
+    } finally {
+      setIsSyncing(false);
+    }
   };
 
+  // Tính tổng số lượng sản phẩm (số lượng unique)
   const getCartCount = () => {
     return cartItems.length;
   };
