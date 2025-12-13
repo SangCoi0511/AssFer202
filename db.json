@@ -892,7 +892,12 @@
     {
       "id": "cart-2-1765560895419",
       "userId": "2",
-      "items": []
+      "items": [
+        {
+          "productId": "2",
+          "quantity": 4
+        }
+      ]
     },
     {
       "id": "cart-2-1765560895420",

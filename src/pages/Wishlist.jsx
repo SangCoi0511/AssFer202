@@ -1,34 +1,88 @@
-import React, { useEffect, useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { useCart } from '../context/CartContext';
-import { useShop } from '../context/ShopContext';
-import { useWishlist } from '../context/WishlistContext';
-import { Link } from 'react-router-dom';
-import { FiTrash2, FiShoppingCart } from 'react-icons/fi';
-import '../styles/Wishlist.css';
+import React, { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
+import { useShop } from "../context/ShopContext";
+import { useWishlist } from "../context/WishlistContext";
+import { useToast } from "../context/ToastContext";
+import { Link } from "react-router-dom";
+import { FiTrash2, FiShoppingCart } from "react-icons/fi";
+import "../styles/Wishlist.css";
 
 const Wishlist = () => {
   const { user } = useAuth();
   const { products } = useShop();
-  const { addToCart } = useCart();
+  const { addToCart, cartItems } = useCart();
   const { wishlistItems: wishlistData, removeFromWishlist } = useWishlist();
+  const { toast } = useToast();
   const [wishlistProducts, setWishlistProducts] = useState([]);
+  const [quantities, setQuantities] = useState({});
 
   useEffect(() => {
     // Map wishlist items to actual products
-    const mappedProducts = wishlistData.map(item => 
-      products.find(p => p.id == item.productId)
-    ).filter(Boolean);
+    const mappedProducts = wishlistData
+      .map((item) => products.find((p) => p.id == item.productId))
+      .filter(Boolean);
     setWishlistProducts(mappedProducts);
   }, [wishlistData, products]);
 
+  const handleQuantityChange = (productId, value) => {
+    const numValue = parseInt(value) || 1;
+    setQuantities((prev) => ({
+      ...prev,
+      [productId]: Math.max(1, numValue),
+    }));
+  };
+
+  const getQuantity = (productId) => {
+    return quantities[productId] || 1;
+  };
+
+  const handleAddToCart = (product) => {
+    const quantity = getQuantity(product.id);
+
+    // Check if product is in stock
+    if (product.stock <= 0) {
+      toast.error("This product is out of stock.");
+      return;
+    }
+
+    // Check existing quantity in cart
+    const existingItem = cartItems.find((item) => item.id === product.id);
+    const currentCartQuantity = existingItem ? existingItem.quantity : 0;
+    const totalQuantity = currentCartQuantity + quantity;
+
+    // Check if total quantity exceeds stock
+    if (totalQuantity > product.stock) {
+      const availableToAdd = product.stock - currentCartQuantity;
+      if (availableToAdd <= 0) {
+        toast.error(
+          `You already have maximum stock (${product.stock}) in your cart.`
+        );
+      } else {
+        toast.error(
+          `Cannot add ${quantity} items. You can only add ${availableToAdd} more (${currentCartQuantity} already in cart, ${product.stock} total stock).`
+        );
+      }
+      return;
+    }
+
+    addToCart(product, quantity);
+    // Reset quantity after adding
+    setQuantities((prev) => ({
+      ...prev,
+      [product.id]: 1,
+    }));
+  };
+
   const handleRemove = async (productId) => {
     // Find wishlist entry
-    const entry = wishlistData.find(item => item.productId === productId);
+    const entry = wishlistData.find((item) => item.productId === productId);
     if (entry) {
       const result = await removeFromWishlist(entry.id);
       if (result.success) {
-        // Product will be auto-removed from wishlistProducts via useEffect
+        toast.success("Removed from wishlist");
+      } else {
+        toast.error("Failed to remove from wishlist");
       }
     }
   };
@@ -50,7 +104,7 @@ const Wishlist = () => {
         <h1>My Wishlist</h1>
 
         <div className="wishlist-grid">
-          {wishlistProducts.map(product => (
+          {wishlistProducts.map((product) => (
             <div key={product.id} className="wishlist-item">
               <Link to={`/product/${product.id}`}>
                 <img src={product.image} alt={product.name} />
@@ -60,10 +114,29 @@ const Wishlist = () => {
                   <h3>{product.name}</h3>
                 </Link>
                 <p className="item-price">${product.price.toFixed(2)}</p>
+                <p className="item-stock">
+                  {product.stock > 0
+                    ? `${product.stock} in stock`
+                    : "Out of stock"}
+                </p>
                 <div className="wishlist-actions">
+                  <div className="quantity-control">
+                    <label>Qty:</label>
+                    <input
+                      type="number"
+                      min="1"
+                      max={product.stock}
+                      value={getQuantity(product.id)}
+                      onChange={(e) =>
+                        handleQuantityChange(product.id, e.target.value)
+                      }
+                      disabled={product.stock === 0}
+                    />
+                  </div>
                   <button
-                    onClick={() => addToCart(product)}
+                    onClick={() => handleAddToCart(product)}
                     className="btn-add"
+                    disabled={product.stock === 0}
                   >
                     <FiShoppingCart /> Add to Cart
                   </button>

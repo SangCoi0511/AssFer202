@@ -1,34 +1,86 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useShop } from '../context/ShopContext';
-import { useCart } from '../context/CartContext';
-import { useAuth } from '../context/AuthContext';
-import { useWishlist } from '../context/WishlistContext';
-import { FiHeart, FiShoppingCart, FiStar } from 'react-icons/fi';
-import '../styles/Shop.css';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useShop } from "../context/ShopContext";
+import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
+import { useWishlist } from "../context/WishlistContext";
+import { useToast } from "../context/ToastContext";
+import { FiHeart, FiShoppingCart, FiStar } from "react-icons/fi";
+import "../styles/Shop.css";
 
 const Shop = () => {
-  const { getFilteredProducts, categories, filters, updateFilters, loading } = useShop();
-  const { addToCart } = useCart();
+  const { getFilteredProducts, categories, filters, updateFilters, loading } =
+    useShop();
+  const { addToCart, cartItems } = useCart();
   const { user } = useAuth();
   const { addToWishlist: addToWishlistContext, isInWishlist } = useWishlist();
+  const { toast } = useToast();
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [displayCount, setDisplayCount] = useState(30);
+  const [quantities, setQuantities] = useState({});
 
   useEffect(() => {
     setFilteredProducts(getFilteredProducts());
     setDisplayCount(30);
   }, [filters]);
 
+  const handleQuantityChange = (productId, value) => {
+    const numValue = parseInt(value) || 1;
+    setQuantities((prev) => ({
+      ...prev,
+      [productId]: Math.max(1, numValue),
+    }));
+  };
+
+  const getQuantity = (productId) => {
+    return quantities[productId] || 1;
+  };
+
   const handleAddToCart = (product) => {
-    addToCart(product);
+    const quantity = getQuantity(product.id);
+
+    // Check if product is in stock
+    if (product.stock <= 0) {
+      toast.error("This product is out of stock.");
+      return;
+    }
+
+    // Check existing quantity in cart
+    const existingItem = cartItems.find((item) => item.id === product.id);
+    const currentCartQuantity = existingItem ? existingItem.quantity : 0;
+    const totalQuantity = currentCartQuantity + quantity;
+    console.log(totalQuantity);
+
+    // Check if total quantity exceeds stock
+    if (totalQuantity > product.stock) {
+      const availableToAdd = product.stock - currentCartQuantity;
+      if (availableToAdd <= 0) {
+        toast.error(
+          `You already have maximum stock (${product.stock}) in your cart.`
+        );
+      } else {
+        toast.error(
+          `Cannot add ${quantity} items. You can only add ${availableToAdd} more (${currentCartQuantity} already in cart, ${product.stock} total stock).`
+        );
+      }
+      return;
+    }
+
+    addToCart(product, quantity);
+    // Reset quantity after adding
+    setQuantities((prev) => ({
+      ...prev,
+      [product.id]: 1,
+    }));
   };
 
   const handleAddToWishlist = async (product) => {
     const result = await addToWishlistContext(product.id);
     if (result.success) {
-      alert('Added to wishlist!');
+      toast.success("Added to wishlist!");
+    } else {
+      toast.error(result.message || "Failed to add to wishlist");
     }
   };
 
@@ -47,7 +99,6 @@ const Shop = () => {
   return (
     <div className="shop-page">
       <div className="shop-container">
-        
         {/* SIDEBAR FILTER */}
         <aside className="shop-sidebar">
           {/* CATEGORY FILTER */}
@@ -55,7 +106,7 @@ const Shop = () => {
             <h3>Categories</h3>
             <div className="category-filters">
               <button
-                className={filters.categoryId === null ? 'active' : ''}
+                className={filters.categoryId === null ? "active" : ""}
                 onClick={() => updateFilters({ categoryId: null })}
               >
                 All
@@ -66,12 +117,10 @@ const Shop = () => {
                   key={cat.id}
                   className={
                     Number(filters.categoryId) === Number(cat.id)
-                      ? 'active'
-                      : ''
+                      ? "active"
+                      : ""
                   }
-                  onClick={() =>
-                    updateFilters({ categoryId: Number(cat.id) })
-                  }
+                  onClick={() => updateFilters({ categoryId: Number(cat.id) })}
                 >
                   {cat.name}
                 </button>
@@ -89,10 +138,7 @@ const Shop = () => {
                 value={filters.priceRange[0]}
                 onChange={(e) =>
                   updateFilters({
-                    priceRange: [
-                      Number(e.target.value),
-                      filters.priceRange[1],
-                    ],
+                    priceRange: [Number(e.target.value), filters.priceRange[1]],
                   })
                 }
               />
@@ -103,10 +149,7 @@ const Shop = () => {
                 value={filters.priceRange[1]}
                 onChange={(e) =>
                   updateFilters({
-                    priceRange: [
-                      filters.priceRange[0],
-                      Number(e.target.value),
-                    ],
+                    priceRange: [filters.priceRange[0], Number(e.target.value)],
                   })
                 }
               />
@@ -137,9 +180,7 @@ const Shop = () => {
                 type="text"
                 placeholder="Search products..."
                 value={filters.searchQuery}
-                onChange={(e) =>
-                  updateFilters({ searchQuery: e.target.value })
-                }
+                onChange={(e) => updateFilters({ searchQuery: e.target.value })}
               />
             </div>
 
@@ -157,7 +198,6 @@ const Shop = () => {
           <div className="products-grid">
             {displayedProducts.map((product) => (
               <div key={product.id} className="product-card">
-                
                 <Link to={`/product/${product.id}`} className="product-image">
                   <img src={product.image} alt={product.name} />
                 </Link>
@@ -178,9 +218,7 @@ const Shop = () => {
 
                   <div className="product-stock">
                     {product.stock > 0 ? (
-                      <span className="in-stock">
-                        {product.stock} in stock
-                      </span>
+                      <span className="in-stock">{product.stock} in stock</span>
                     ) : (
                       <span className="out-of-stock">Out of stock</span>
                     )}
@@ -188,6 +226,20 @@ const Shop = () => {
                 </div>
 
                 <div className="product-actions">
+                  <div className="quantity-control">
+                    <label>Qty:</label>
+                    <input
+                      type="number"
+                      min="1"
+                      max={product.stock}
+                      value={getQuantity(product.id)}
+                      onChange={(e) =>
+                        handleQuantityChange(product.id, e.target.value)
+                      }
+                      disabled={product.stock === 0}
+                    />
+                  </div>
+
                   <button
                     className="btn-cart"
                     onClick={() => handleAddToCart(product)}
@@ -209,10 +261,7 @@ const Shop = () => {
 
           {hasMoreProducts && (
             <div className="load-more-container">
-              <button
-                onClick={handleLoadMore}
-                className="btn-load-more"
-              >
+              <button onClick={handleLoadMore} className="btn-load-more">
                 Load More Products ({remainingProducts} remaining)
               </button>
             </div>

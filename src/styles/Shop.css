@@ -365,6 +365,55 @@
   color: white;
 }
 
+/* Quantity Control */
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.quantity-control label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #6b7280;
+  margin: 0;
+}
+
+.quantity-control input[type="number"] {
+  width: 60px;
+  height: 36px;
+  padding: 6px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.quantity-control input[type="number"]:focus {
+  outline: none;
+  border-color: #1a1a1a;
+}
+
+.quantity-control input[type="number"]:disabled {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Remove spinner arrows in number input */
+.quantity-control input[type="number"]::-webkit-inner-spin-button,
+.quantity-control input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.quantity-control input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .shop-container {

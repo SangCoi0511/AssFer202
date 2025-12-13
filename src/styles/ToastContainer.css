@@ -1,0 +1,148 @@
+/* ============================================
+   CUSTOM TOAST NOTIFICATIONS
+   Using React-Bootstrap Toast Component
+============================================ */
+
+.custom-toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.custom-toast {
+  pointer-events: auto;
+  min-width: 300px;
+  max-width: 400px;
+  margin-bottom: 12px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Toast Body */
+.custom-toast .toast-body {
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Toast Icons */
+.toast-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* Toast Message */
+.toast-message {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* Close Button */
+.toast-close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  color: inherit;
+  opacity: 0.5;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+
+.toast-close-btn:hover {
+  opacity: 1;
+}
+
+/* ========== SUCCESS TOAST ========== */
+.custom-toast-success .toast-body {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  color: #065f46;
+}
+
+.toast-icon-success {
+  background: #10b981;
+  color: white;
+}
+
+/* ========== ERROR TOAST ========== */
+.custom-toast-error .toast-body {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  color: #991b1b;
+}
+
+.toast-icon-error {
+  background: #ef4444;
+  color: white;
+}
+
+/* ========== WARNING TOAST ========== */
+.custom-toast-warning .toast-body {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  color: #92400e;
+}
+
+.toast-icon-warning {
+  background: #f59e0b;
+  color: white;
+}
+
+/* ========== INFO TOAST ========== */
+.custom-toast-info .toast-body {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  color: #1e3a8a;
+}
+
+.toast-icon-info {
+  background: #3b82f6;
+  color: white;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .custom-toast-container {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+  }
+
+  .custom-toast {
+    min-width: auto;
+    max-width: 100%;
+  }
+}

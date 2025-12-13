@@ -8,6 +8,7 @@ import {
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import { useWishlist } from "../context/WishlistContext";
+import { useToast } from "../context/ToastContext";
 import { FiShoppingCart, FiHeart, FiStar } from "react-icons/fi";
 import "../styles/ProductDetail.css";
 
@@ -21,6 +22,7 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const { addToCart, cartItems } = useCart();
   const { user } = useAuth();
+  const { toast } = useToast();
 
   useEffect(() => {
     loadProductData();
@@ -60,7 +62,7 @@ const ProductDetail = () => {
   const handleAddToCart = () => {
     // Check if product is in stock
     if (product.stock <= 0) {
-      alert("This product is out of stock.");
+      toast.error("This product is out of stock.");
       return;
     }
 
@@ -68,17 +70,16 @@ const ProductDetail = () => {
     const existingItem = cartItems.find((item) => item.id === product.id);
     const currentCartQuantity = existingItem ? existingItem.quantity : 0;
     const totalQuantity = currentCartQuantity + quantity;
-    console.log(totalQuantity);
 
     // Check if total quantity exceeds stock
     if (totalQuantity > product.stock) {
       const availableToAdd = product.stock - currentCartQuantity;
       if (availableToAdd <= 0) {
-        alert(
+        toast.error(
           `You already have maximum stock (${product.stock}) in your cart.`
         );
       } else {
-        alert(
+        toast.error(
           `Cannot add ${quantity} items. You can only add ${availableToAdd} more (${currentCartQuantity} already in cart, ${product.stock} total stock).`
         );
       }
@@ -86,7 +87,6 @@ const ProductDetail = () => {
     }
 
     addToCart(product, quantity);
-    alert("Added to cart successfully!");
   };
 
   const { addToWishlist: addToWishlistContext } = useWishlist();
@@ -94,14 +94,16 @@ const ProductDetail = () => {
   const handleAddToWishlist = async () => {
     const result = await addToWishlistContext(Number(id));
     if (result.success) {
-      alert("Added to wishlist!");
+      //
+    } else {
+      toast.error(result.message || "Failed to add to wishlist");
     }
   };
 
   const handleSubmitReview = async (e) => {
     e.preventDefault();
     if (!user) {
-      alert("Please login to submit a review");
+      toast.error("Please login to submit a review");
       return;
     }
 
@@ -115,9 +117,11 @@ const ProductDetail = () => {
       });
       setComment("");
       setRating(5);
+      toast.success("Review submitted successfully!");
       loadProductData(); // Reload reviews
     } catch (error) {
       console.error("Failed to submit review:", error);
+      toast.error("Failed to submit review. Please try again.");
     }
   };
 

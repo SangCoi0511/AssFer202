@@ -4,21 +4,26 @@ import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { ShopProvider } from './context/ShopContext';
 import { WishlistProvider } from './context/WishlistContext';
+import { ToastProvider } from './context/ToastContext';
+import ToastContainer from './components/ToastContainer';
 import AppRoutes from './routes/AppRoutes';
 import './App.css';
 
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <CartProvider>
-          <ShopProvider>
-            <WishlistProvider>
-              <AppRoutes />
-            </WishlistProvider>
-          </ShopProvider>
-        </CartProvider>
-      </AuthProvider>
+      <ToastProvider>
+        <AuthProvider>
+          <CartProvider>
+            <ShopProvider>
+              <WishlistProvider>
+                <AppRoutes />
+                <ToastContainer />
+              </WishlistProvider>
+            </ShopProvider>
+          </CartProvider>
+        </AuthProvider>
+      </ToastProvider>
     </BrowserRouter>
   );
 }
