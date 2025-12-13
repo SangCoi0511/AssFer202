@@ -3,7 +3,6 @@ import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 import { useShop } from "../context/ShopContext";
 import { useWishlist } from "../context/WishlistContext";
-import { useToast } from "../context/ToastContext";
 import { Link } from "react-router-dom";
 import { FiTrash2, FiShoppingCart } from "react-icons/fi";
 import "../styles/Wishlist.css";
@@ -13,9 +12,9 @@ const Wishlist = () => {
   const { products } = useShop();
   const { addToCart, cartItems } = useCart();
   const { wishlistItems: wishlistData, removeFromWishlist } = useWishlist();
-  const { toast } = useToast();
   const [wishlistProducts, setWishlistProducts] = useState([]);
   const [quantities, setQuantities] = useState({});
+  const [modal, setModal] = useState({ show: false, title: "", message: "" });
 
   useEffect(() => {
     // Map wishlist items to actual products
@@ -24,6 +23,10 @@ const Wishlist = () => {
       .filter(Boolean);
     setWishlistProducts(mappedProducts);
   }, [wishlistData, products]);
+
+  const openModal = (title, message) =>
+    setModal({ show: true, title, message });
+  const closeModal = () => setModal((prev) => ({ ...prev, show: false }));
 
   const handleQuantityChange = (productId, value) => {
     const numValue = parseInt(value) || 1;
@@ -42,12 +45,14 @@ const Wishlist = () => {
 
     // Check if product is in stock
     if (product.stock <= 0) {
-      toast.error("This product is out of stock.");
+      openModal("Notification", "This product is out of stock.");
       return;
     }
 
     // Check existing quantity in cart
-    const existingItem = cartItems.find((item) => item.id === product.id);
+    const existingItem = cartItems.find(
+      (item) => item.productId === product.id
+    );
     const currentCartQuantity = existingItem ? existingItem.quantity : 0;
     const totalQuantity = currentCartQuantity + quantity;
 
@@ -55,11 +60,13 @@ const Wishlist = () => {
     if (totalQuantity > product.stock) {
       const availableToAdd = product.stock - currentCartQuantity;
       if (availableToAdd <= 0) {
-        toast.error(
+        openModal(
+          "Notification",
           `You already have maximum stock (${product.stock}) in your cart.`
         );
       } else {
-        toast.error(
+        openModal(
+          "Notification",
           `Cannot add ${quantity} items. You can only add ${availableToAdd} more (${currentCartQuantity} already in cart, ${product.stock} total stock).`
         );
       }
@@ -78,12 +85,7 @@ const Wishlist = () => {
     // Find wishlist entry
     const entry = wishlistData.find((item) => item.productId === productId);
     if (entry) {
-      const result = await removeFromWishlist(entry.id);
-      if (result.success) {
-        toast.success("Removed from wishlist");
-      } else {
-        toast.error("Failed to remove from wishlist");
-      }
+      await removeFromWishlist(entry.id);
     }
   };
 
@@ -152,6 +154,25 @@ const Wishlist = () => {
           ))}
         </div>
       </div>
+
+      {modal.show && (
+        <div className="popup-overlay" onClick={closeModal}>
+          <div className="popup-card" onClick={(e) => e.stopPropagation()}>
+            <div className="popup-header">
+              <h4>{modal.title || "Notification"}</h4>
+              <button className="popup-close" onClick={closeModal}>
+                ×
+              </button>
+            </div>
+            <div className="popup-body">{modal.message}</div>
+            <div className="popup-footer">
+              <button className="popup-action" onClick={closeModal}>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import {
   getProductById,
   getReviewsByProduct,
@@ -8,7 +8,6 @@ import {
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import { useWishlist } from "../context/WishlistContext";
-import { useToast } from "../context/ToastContext";
 import { FiShoppingCart, FiHeart, FiStar } from "react-icons/fi";
 import "../styles/ProductDetail.css";
 
@@ -22,7 +21,11 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const { addToCart, cartItems } = useCart();
   const { user } = useAuth();
-  const { toast } = useToast();
+  const [modal, setModal] = useState({ show: false, title: "", message: "" });
+
+  const openModal = (title, message) =>
+    setModal({ show: true, title, message });
+  const closeModal = () => setModal((prev) => ({ ...prev, show: false }));
 
   useEffect(() => {
     loadProductData();
@@ -62,12 +65,14 @@ const ProductDetail = () => {
   const handleAddToCart = () => {
     // Check if product is in stock
     if (product.stock <= 0) {
-      toast.error("This product is out of stock.");
+      openModal("Notification", "This product is out of stock.");
       return;
     }
 
     // Check existing quantity in cart
-    const existingItem = cartItems.find((item) => item.id === product.id);
+    const existingItem = cartItems.find(
+      (item) => item.productId === product.id
+    );
     const currentCartQuantity = existingItem ? existingItem.quantity : 0;
     const totalQuantity = currentCartQuantity + quantity;
 
@@ -75,11 +80,13 @@ const ProductDetail = () => {
     if (totalQuantity > product.stock) {
       const availableToAdd = product.stock - currentCartQuantity;
       if (availableToAdd <= 0) {
-        toast.error(
+        openModal(
+          "Notification",
           `You already have maximum stock (${product.stock}) in your cart.`
         );
       } else {
-        toast.error(
+        openModal(
+          "Notification",
           `Cannot add ${quantity} items. You can only add ${availableToAdd} more (${currentCartQuantity} already in cart, ${product.stock} total stock).`
         );
       }
@@ -94,16 +101,16 @@ const ProductDetail = () => {
   const handleAddToWishlist = async () => {
     const result = await addToWishlistContext(Number(id));
     if (result.success) {
-      //
+      openModal("Notification", "Đã thêm vào danh sách yêu thích.");
     } else {
-      toast.error(result.message || "Failed to add to wishlist");
+      openModal("Notification", result.message || "Failed to add to wishlist");
     }
   };
 
   const handleSubmitReview = async (e) => {
     e.preventDefault();
     if (!user) {
-      toast.error("Please login to submit a review");
+      openModal("Notification", "Please login to submit a review");
       return;
     }
 
@@ -117,11 +124,11 @@ const ProductDetail = () => {
       });
       setComment("");
       setRating(5);
-      toast.success("Review submitted successfully!");
+      openModal("Thành công", "Review submitted successfully!");
       loadProductData(); // Reload reviews
     } catch (error) {
       console.error("Failed to submit review:", error);
-      toast.error("Failed to submit review. Please try again.");
+      openModal("Notification", "Failed to submit review. Please try again.");
     }
   };
 
@@ -134,137 +141,157 @@ const ProductDetail = () => {
   }
 
   return (
-    <div className="product-detail-page">
-      <div className="product-detail-container">
-        {/* Product Info Section */}
-        <div className="product-main">
-          <div className="product-image-large">
-            <img src={product.image} alt={product.name} />
+    <>
+      <div className="product-detail-page">
+        <div className="product-detail-container">
+          {/* Product Info Section */}
+          <div className="product-main">
+            <div className="product-image-large">
+              <img src={product.image} alt={product.name} />
+            </div>
+
+            <div className="product-details">
+              <h1>{product.name}</h1>
+
+              <div className="product-rating">
+                <FiStar className="star-icon" />
+                <span>
+                  {product.rating} ({reviews.length} reviews)
+                </span>
+              </div>
+
+              <div className="product-price-large">
+                ${product.price.toFixed(2)}
+              </div>
+
+              <p className="product-description">{product.description}</p>
+
+              <div className="product-stock-info">
+                {product.stock > 0 ? (
+                  <span className="in-stock">{product.stock} in stock</span>
+                ) : (
+                  <span className="out-of-stock">Out of stock</span>
+                )}
+              </div>
+
+              <div className="product-actions-large">
+                <div className="quantity-selector">
+                  <label>Quantity:</label>
+                  <input
+                    type="number"
+                    min="1"
+                    max={product.stock}
+                    value={quantity}
+                    onChange={(e) => setQuantity(Number(e.target.value))}
+                  />
+                </div>
+
+                <button
+                  className="btn-add-to-cart"
+                  onClick={handleAddToCart}
+                  disabled={product.stock === 0}
+                >
+                  <FiShoppingCart /> Add to Cart
+                </button>
+
+                <button
+                  className="btn-wishlist-large"
+                  onClick={handleAddToWishlist}
+                >
+                  <FiHeart /> Add to Wishlist
+                </button>
+              </div>
+            </div>
           </div>
 
-          <div className="product-details">
-            <h1>{product.name}</h1>
+          {/* Reviews Section */}
+          <div className="reviews-section">
+            <h2>Customer Reviews & Comments</h2>
 
-            <div className="product-rating">
-              <FiStar className="star-icon" />
-              <span>
-                {product.rating} ({reviews.length} reviews)
-              </span>
-            </div>
+            {user && (
+              <form className="review-form" onSubmit={handleSubmitReview}>
+                <h3>Write a Review</h3>
+                <div className="form-group">
+                  <label>Rating</label>
+                  <select
+                    value={rating}
+                    onChange={(e) => setRating(e.target.value)}
+                  >
+                    <option value="5">5 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="2">2 Stars</option>
+                    <option value="1">1 Star</option>
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label>Comment</label>
+                  <textarea
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    placeholder="Share your thoughts about this product..."
+                    required
+                  />
+                </div>
+                <button type="submit" className="btn-primary">
+                  Submit Review
+                </button>
+              </form>
+            )}
 
-            <div className="product-price-large">
-              ${product.price.toFixed(2)}
-            </div>
-
-            <p className="product-description">{product.description}</p>
-
-            <div className="product-stock-info">
-              {product.stock > 0 ? (
-                <span className="in-stock">{product.stock} in stock</span>
+            <div className="reviews-list">
+              {reviews.length > 0 ? (
+                reviews.map((review) => (
+                  <div key={review.id} className="review-item">
+                    <div className="review-header">
+                      <div className="review-info">
+                        <span className="review-user">{review.userName}</span>
+                        <div className="review-rating">
+                          {[...Array(5)].map((_, i) => (
+                            <FiStar
+                              key={i}
+                              className={
+                                i < review.rating ? "star-filled" : "star-empty"
+                              }
+                            />
+                          ))}
+                        </div>
+                      </div>
+                      <span className="review-date">
+                        {new Date(review.date).toLocaleDateString()}
+                      </span>
+                    </div>
+                    <p className="review-comment">{review.comment}</p>
+                  </div>
+                ))
               ) : (
-                <span className="out-of-stock">Out of stock</span>
+                <p className="no-reviews">
+                  No reviews yet. Be the first to review!
+                </p>
               )}
             </div>
-
-            <div className="product-actions-large">
-              <div className="quantity-selector">
-                <label>Quantity:</label>
-                <input
-                  type="number"
-                  min="1"
-                  max={product.stock}
-                  value={quantity}
-                  onChange={(e) => setQuantity(Number(e.target.value))}
-                />
-              </div>
-
-              <button
-                className="btn-add-to-cart"
-                onClick={handleAddToCart}
-                disabled={product.stock === 0}
-              >
-                <FiShoppingCart /> Add to Cart
-              </button>
-
-              <button
-                className="btn-wishlist-large"
-                onClick={handleAddToWishlist}
-              >
-                <FiHeart /> Add to Wishlist
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Reviews Section */}
-        <div className="reviews-section">
-          <h2>Customer Reviews & Comments</h2>
-
-          {user && (
-            <form className="review-form" onSubmit={handleSubmitReview}>
-              <h3>Write a Review</h3>
-              <div className="form-group">
-                <label>Rating</label>
-                <select
-                  value={rating}
-                  onChange={(e) => setRating(e.target.value)}
-                >
-                  <option value="5">5 Stars</option>
-                  <option value="4">4 Stars</option>
-                  <option value="3">3 Stars</option>
-                  <option value="2">2 Stars</option>
-                  <option value="1">1 Star</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <label>Comment</label>
-                <textarea
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  placeholder="Share your thoughts about this product..."
-                  required
-                />
-              </div>
-              <button type="submit" className="btn-primary">
-                Submit Review
-              </button>
-            </form>
-          )}
-
-          <div className="reviews-list">
-            {reviews.length > 0 ? (
-              reviews.map((review) => (
-                <div key={review.id} className="review-item">
-                  <div className="review-header">
-                    <div className="review-info">
-                      <span className="review-user">{review.userName}</span>
-                      <div className="review-rating">
-                        {[...Array(5)].map((_, i) => (
-                          <FiStar
-                            key={i}
-                            className={
-                              i < review.rating ? "star-filled" : "star-empty"
-                            }
-                          />
-                        ))}
-                      </div>
-                    </div>
-                    <span className="review-date">
-                      {new Date(review.date).toLocaleDateString()}
-                    </span>
-                  </div>
-                  <p className="review-comment">{review.comment}</p>
-                </div>
-              ))
-            ) : (
-              <p className="no-reviews">
-                No reviews yet. Be the first to review!
-              </p>
-            )}
           </div>
         </div>
       </div>
-    </div>
+      {modal.show && (
+        <div className="popup-overlay" onClick={closeModal}>
+          <div className="popup-card" onClick={(e) => e.stopPropagation()}>
+            <div className="popup-header">
+              <h4>{modal.title || "Notification"}</h4>
+              <button className="popup-close" onClick={closeModal}>
+                ×
+              </button>
+            </div>
+            <div className="popup-body">{modal.message}</div>
+            <div className="popup-footer">
+              <button className="popup-action" onClick={closeModal}>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

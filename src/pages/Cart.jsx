@@ -6,17 +6,17 @@ import { FiTrash2, FiPlus, FiMinus, FiUser } from "react-icons/fi";
 import "../styles/Cart.css";
 
 const Cart = () => {
-  const { 
-    cartItems, 
-    removeFromCart, 
-    updateQuantity, 
+  const {
+    cartItems,
+    removeFromCart,
+    updateQuantity,
     clearCart,
     getCartTotal,
     getCartItemsWithDetails,
     isSyncing,
-    currentUserId 
+    currentUserId,
   } = useCart();
-  
+
   const { user, isAuthenticated } = useAuth();
   const [detailedCartItems, setDetailedCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,7 +31,7 @@ const Cart = () => {
       const itemsWithDetails = await getCartItemsWithDetails();
       setDetailedCartItems(itemsWithDetails);
     } catch (error) {
-      console.error('Error loading cart details:', error);
+      console.error("Error loading cart details:", error);
     } finally {
       setLoading(false);
     }
@@ -48,7 +48,7 @@ const Cart = () => {
     );
   }
 
-  // Hiển thị thông báo khi không đăng nhập nhưng có sản phẩm trong cart
+  // Hiển thị Notification khi không đăng nhập nhưng có sản phẩm trong cart
   const showLoginPrompt = !isAuthenticated && detailedCartItems.length > 0;
 
   return (
@@ -70,7 +70,7 @@ const Cart = () => {
             </div>
           )}
         </div>
-        
+
         {showLoginPrompt && (
           <div className="cart-login-prompt">
             <div className="prompt-content">
@@ -87,7 +87,7 @@ const Cart = () => {
             </div>
           </div>
         )}
-        
+
         {isSyncing && (
           <div className="syncing-notice">
             <span>🔄 Saving your cart...</span>
@@ -106,28 +106,39 @@ const Cart = () => {
           <div className="cart-content">
             <div className="cart-items">
               {detailedCartItems.map((item) => (
-                <div key={`${item.productId}-${item.quantity}`} className="cart-item">
+                <div
+                  key={`${item.productId}-${item.quantity}`}
+                  className="cart-item"
+                >
                   <img src={item.product.image} alt={item.product.name} />
 
                   <div className="cart-item-details">
                     <Link to={`/product/${item.product.id}`}>
                       <h3>{item.product.name}</h3>
                     </Link>
-                    <p className="item-price">${item.product.price.toFixed(2)}</p>
+                    <p className="item-price">
+                      ${item.product.price.toFixed(2)}
+                    </p>
                     <p className="item-stock">In stock: {item.product.stock}</p>
                   </div>
 
                   <div className="quantity-controls">
                     <button
-                      onClick={() => updateQuantity(item.productId, item.quantity - 1)}
+                      onClick={() =>
+                        updateQuantity(item.productId, item.quantity - 1)
+                      }
                       disabled={item.quantity <= 1 || isSyncing}
                     >
                       <FiMinus />
                     </button>
                     <span>{item.quantity}</span>
                     <button
-                      onClick={() => updateQuantity(item.productId, item.quantity + 1)}
-                      disabled={item.quantity >= item.product.stock || isSyncing}
+                      onClick={() =>
+                        updateQuantity(item.productId, item.quantity + 1)
+                      }
+                      disabled={
+                        item.quantity >= item.product.stock || isSyncing
+                      }
                     >
                       <FiPlus />
                     </button>
@@ -152,8 +163,20 @@ const Cart = () => {
               <h2>Order Summary</h2>
 
               <div className="summary-line">
-                <span>Items ({detailedCartItems.reduce((acc, item) => acc + item.quantity, 0)})</span>
-                <span>${getCartTotal(detailedCartItems.map(item => item.product)).toFixed(2)}</span>
+                <span>
+                  Items (
+                  {detailedCartItems.reduce(
+                    (acc, item) => acc + item.quantity,
+                    0
+                  )}
+                  )
+                </span>
+                <span>
+                  $
+                  {getCartTotal(
+                    detailedCartItems.map((item) => item.product)
+                  ).toFixed(2)}
+                </span>
               </div>
 
               <div className="summary-line">
@@ -163,17 +186,24 @@ const Cart = () => {
 
               <div className="summary-total">
                 <span>Total</span>
-                <span>${getCartTotal(detailedCartItems.map(item => item.product)).toFixed(2)}</span>
+                <span>
+                  $
+                  {getCartTotal(
+                    detailedCartItems.map((item) => item.product)
+                  ).toFixed(2)}
+                </span>
               </div>
 
               <Link to="/checkout" className="btn-checkout">
                 Proceed to Checkout
               </Link>
 
-              <button 
-                className="btn-clear" 
+              <button
+                className="btn-clear"
                 onClick={() => {
-                  if (window.confirm('Are you sure you want to clear your cart?')) {
+                  if (
+                    window.confirm("Are you sure you want to clear your cart?")
+                  ) {
                     clearCart();
                   }
                 }}
