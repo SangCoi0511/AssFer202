@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Form, Button, Spinner } from "react-bootstrap";
-import { useAuth } from '../context/AuthContext';
-import { getOrdersByUser } from '../services/api';
-import '../styles/Profile.css';
+import { useAuth } from "../context/AuthContext";
+import { getOrdersByUser } from "../services/api";
+import "../styles/Profile.css";
 
 const Profile = () => {
   const { user, updateUser } = useAuth();
@@ -14,7 +14,7 @@ const Profile = () => {
     email: user?.email || "",
     address: user?.address || "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
 
   const [error, setError] = useState("");
@@ -23,11 +23,11 @@ const Profile = () => {
 
   useEffect(() => {
     if (user) {
-      setProfileData(prev => ({
+      setProfileData((prev) => ({
         ...prev,
         name: user.name,
         email: user.email,
-        address: user.address || ""
+        address: user.address || "",
       }));
       loadOrders();
     }
@@ -35,9 +35,9 @@ const Profile = () => {
 
   const handleProfileChange = (e) => {
     const { name, value } = e.target;
-    setProfileData(prev => ({
+    setProfileData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -169,12 +169,11 @@ const Profile = () => {
 
       setSuccess("Profile updated successfully.");
 
-      setProfileData(prev => ({
+      setProfileData((prev) => ({
         ...prev,
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
       }));
-
     } catch (err) {
       console.error("Error updating profile:", err);
       setError("An error occurred while updating your profile.");
@@ -185,124 +184,299 @@ const Profile = () => {
 
   return (
     <div className="profile-page">
-      <div className="profile-container">
-        <h1>My Profile</h1>
+      <div>
+        {/* Header */}
+        <div className="profile-header">
+          <h1>My Profile</h1>
+        </div>
 
-        <Form onSubmit={handleProfileUpdate} className="profile-info">
-          <h2>Account Information</h2>
+        {/* Flex Container for Account Info and Order History */}
+        <div className="profile-flex-container">
+          {/* Left Side: Account Information */}
+          <div className="profile-card">
+            <div className="card-content">
+              <h2 className="section-title">Manage your account information</h2>
 
-          {error && (
-            <div className="custom-alert error">
-              <span className="alert-icon">⚠️</span> {error}
-            </div>
-          )}
-
-          {success && (
-            <div className="custom-alert success">
-              <span className="alert-icon">✔️</span> {success}
-            </div>
-          )}
-
-          {/* NAME */}
-          <div className="info-item">
-            <strong>Name:</strong>
-            <Form.Control
-              type="text"
-              name="name"
-              value={profileData.name}
-              onChange={handleProfileChange}
-              className="mt-1"
-              required
-            />
-          </div>
-
-          {/* EMAIL */}
-          <div className="info-item">
-            <strong>Email:</strong>
-            <Form.Control
-              type="email"
-              name="email"
-              value={profileData.email}
-              onChange={handleProfileChange}
-              className="mt-1"
-              required
-            />
-          </div>
-
-          {/* ADDRESS */}
-          <div className="info-item">
-            <strong>Address:</strong>
-            <Form.Control
-              type="text"
-              name="address"
-              value={profileData.address}
-              onChange={handleProfileChange}
-              className="mt-1"
-            />
-          </div>
-
-          {/* PASSWORD */}
-          <div className="info-item">
-            <strong>New Password:</strong>
-            <Form.Control
-              type="password"
-              name="password"
-              placeholder="Enter new password (optional)"
-              value={profileData.password}
-              onChange={handleProfileChange}
-              className="mt-1"
-            />
-          </div>
-
-          {/* CONFIRM PASSWORD — only show when password is typed */}
-          {profileData.password.trim() !== "" && (
-            <div className="info-item fade-in">
-              <strong>Confirm Password:</strong>
-              <Form.Control
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm new password"
-                value={profileData.confirmPassword}
-                onChange={handleProfileChange}
-                className="mt-1"
-                required
-              />
-            </div>
-          )}
-
-          {/* SAVE BUTTON */}
-          <div className="text-center mt-3">
-            <Button type="submit" variant="primary" disabled={loading}>
-              {loading ? <Spinner animation="border" size="sm" /> : "Save"}
-            </Button>
-          </div>
-        </Form>
-
-        {/* ORDER HISTORY */}
-        <div className="orders-section">
-          <h2>Order History</h2>
-          {orders.length > 0 ? (
-            <div className="orders-list">
-              {orders.map(order => (
-                <div key={order.id} className="order-card">
-                  <div className="order-header">
-                    <span className="order-id">Order #{order.id}</span>
-                    <span className="order-date">
-                      {new Date(order.date).toLocaleDateString()}
-                    </span>
-                  </div>
-                  <div className="order-status">
-                    Status: <span className={order.status?.toLowerCase()}>{order.status}</span>
-                  </div>
-                  <div className="order-total">
-                    Total: ${order.total?.toFixed(2)}
-                  </div>
+              {/* Alert Messages */}
+              {error && (
+                <div className="custom-alert error">
+                  <span className="alert-icon">⚠️</span> {error}
                 </div>
-              ))}
+              )}
+
+              {success && (
+                <div className="custom-alert success">
+                  <span className="alert-icon">✔️</span> {success}
+                </div>
+              )}
+
+              <Form onSubmit={handleProfileUpdate}>
+                <div className="form-grid">
+                  {/* NAME FIELD */}
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <div className="form-group">
+                      <label className="form-label">
+                        <svg
+                          className="label-icon"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                          />
+                        </svg>
+                        Name
+                      </label>
+                      <div className="input-wrapper">
+                        <Form.Control
+                          type="text"
+                          name="name"
+                          value={profileData.name}
+                          onChange={handleProfileChange}
+                          placeholder="Enter your name"
+                          className="form-input"
+                          required
+                          disabled={loading}
+                        />
+                      </div>
+                      <p className="field-hint">
+                        *Full name with 2-50 characters
+                      </p>
+                    </div>
+
+                    {/* EMAIL FIELD */}
+                    <div className="form-group">
+                      <label className="form-label">
+                        <svg
+                          className="label-icon"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                          />
+                        </svg>
+                        Email
+                      </label>
+                      <div className="input-wrapper">
+                        <Form.Control
+                          type="email"
+                          name="email"
+                          value={profileData.email}
+                          onChange={handleProfileChange}
+                          placeholder="Enter your email"
+                          className="form-input"
+                          required
+                          disabled={loading}
+                        />
+                      </div>
+                      <p className="field-hint">*Valid email address</p>
+                    </div>
+                  </div>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    {/* ADDRESS FIELD */}
+                    <div className="form-group">
+                      <label className="form-label">
+                        <svg
+                          className="label-icon"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+                        </svg>
+                        Address
+                      </label>
+                      <div className="input-wrapper">
+                        <Form.Control
+                          type="text"
+                          name="address"
+                          value={profileData.address}
+                          onChange={handleProfileChange}
+                          placeholder="Enter your address"
+                          className="form-input"
+                          disabled={loading}
+                        />
+                      </div>
+                      <p className="field-hint">*Minimum 5 characters</p>
+                    </div>
+
+                    {/* PASSWORD FIELD */}
+                    <div className="form-group">
+                      <label className="form-label">
+                        <svg
+                          className="label-icon"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                          />
+                        </svg>
+                        New Password
+                      </label>
+                      <div className="input-wrapper">
+                        <Form.Control
+                          type="password"
+                          name="password"
+                          value={profileData.password}
+                          onChange={handleProfileChange}
+                          placeholder="Enter new password (optional)"
+                          className="form-input"
+                          disabled={loading}
+                        />
+                      </div>
+                      <p className="field-hint">
+                        *6-20 characters with uppercase, lowercase, and number
+                      </p>
+                    </div>
+                  </div>
+                  {/* CONFIRM PASSWORD — only show when password is typed */}
+                  {profileData.password.trim() !== "" && (
+                    <div className="form-group fade-in">
+                      <label className="form-label">
+                        <svg
+                          className="label-icon"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                        Confirm Password
+                      </label>
+                      <div className="input-wrapper">
+                        <Form.Control
+                          type="password"
+                          name="confirmPassword"
+                          value={profileData.confirmPassword}
+                          onChange={handleProfileChange}
+                          placeholder="Confirm new password"
+                          className="form-input"
+                          required
+                          disabled={loading}
+                        />
+                      </div>
+                      <p className="field-hint">
+                        *Must match the password above
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                {/* SAVE BUTTON */}
+                <div className="form-actions">
+                  <Button type="submit" disabled={loading}>
+                    {loading && (
+                      <Spinner
+                        animation="border"
+                        size="sm"
+                        className="btn-spinner"
+                      />
+                    )}
+                    {loading ? "Saving..." : "Save Changes"}
+                  </Button>
+                </div>
+              </Form>
             </div>
-          ) : (
-            <p className="no-orders">No orders yet</p>
-          )}
+          </div>
+
+          {/* Right Side: Order History Table */}
+          <div className="orders-card">
+            <div className="card-content">
+              <h2 className="section-title">Order History</h2>
+              {orders.length > 0 ? (
+                <div className="table-responsive">
+                  <table className="orders-table">
+                    <thead>
+                      <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {orders.map((order) => (
+                        <tr key={order.id}>
+                          <td className="order-id-cell">#{order.id}</td>
+                          <td className="order-date-cell">
+                            {new Date(order.date).toLocaleDateString()}
+                          </td>
+                          <td className="order-status-cell">
+                            <span
+                              className={`status-badge ${order.status?.toLowerCase()}`}
+                            >
+                              {order.status}
+                            </span>
+                          </td>
+                          <td className="order-total-cell">
+                            ${order.total?.toFixed(2)}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <div className="no-orders">
+                  <svg
+                    className="no-orders-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                    />
+                  </svg>
+                  <p>No orders yet</p>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>

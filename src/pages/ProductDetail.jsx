@@ -1,18 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { getProductById, getReviewsByProduct, createReview } from '../services/api';
-import { useCart } from '../context/CartContext';
-import { useAuth } from '../context/AuthContext';
-import { useWishlist } from '../context/WishlistContext';
-import { FiShoppingCart, FiHeart, FiStar } from 'react-icons/fi';
-import '../styles/ProductDetail.css';
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import {
+  getProductById,
+  getReviewsByProduct,
+  createReview,
+} from "../services/api";
+import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
+import { useWishlist } from "../context/WishlistContext";
+import { FiShoppingCart, FiHeart, FiStar } from "react-icons/fi";
+import "../styles/ProductDetail.css";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [quantity, setQuantity] = useState(1);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const [rating, setRating] = useState(5);
   const [loading, setLoading] = useState(true);
   const { addToCart, cartItems } = useCart();
@@ -32,7 +36,7 @@ const ProductDetail = () => {
       setProduct(productRes.data);
 
       // Fetch user data for each review
-      const { getUsers } = await import('../services/api');
+      const { getUsers } = await import("../services/api");
       const usersRes = await getUsers();
       const usersMap = usersRes.data.reduce((acc, user) => {
         acc[user.id] = user.name;
@@ -40,14 +44,14 @@ const ProductDetail = () => {
       }, {});
 
       // Add user names to reviews
-      const reviewsWithUsers = reviewsRes.data.map(review => ({
+      const reviewsWithUsers = reviewsRes.data.map((review) => ({
         ...review,
-        userName: usersMap[review.userId] || 'Anonymous'
+        userName: usersMap[review.userId] || "Anonymous",
       }));
 
       setReviews(reviewsWithUsers);
     } catch (error) {
-      console.error('Failed to load product:', error);
+      console.error("Failed to load product:", error);
     } finally {
       setLoading(false);
     }
@@ -56,28 +60,33 @@ const ProductDetail = () => {
   const handleAddToCart = () => {
     // Check if product is in stock
     if (product.stock <= 0) {
-      alert('This product is out of stock.');
+      alert("This product is out of stock.");
       return;
     }
-    
+
     // Check existing quantity in cart
-    const existingItem = cartItems.find(item => item.id === product.id);
+    const existingItem = cartItems.find((item) => item.id === product.id);
     const currentCartQuantity = existingItem ? existingItem.quantity : 0;
     const totalQuantity = currentCartQuantity + quantity;
-    
+    console.log(totalQuantity);
+
     // Check if total quantity exceeds stock
     if (totalQuantity > product.stock) {
       const availableToAdd = product.stock - currentCartQuantity;
       if (availableToAdd <= 0) {
-        alert(`You already have maximum stock (${product.stock}) in your cart.`);
+        alert(
+          `You already have maximum stock (${product.stock}) in your cart.`
+        );
       } else {
-        alert(`Cannot add ${quantity} items. You can only add ${availableToAdd} more (${currentCartQuantity} already in cart, ${product.stock} total stock).`);
+        alert(
+          `Cannot add ${quantity} items. You can only add ${availableToAdd} more (${currentCartQuantity} already in cart, ${product.stock} total stock).`
+        );
       }
       return;
     }
-    
+
     addToCart(product, quantity);
-    alert('Added to cart successfully!');
+    alert("Added to cart successfully!");
   };
 
   const { addToWishlist: addToWishlistContext } = useWishlist();
@@ -85,14 +94,14 @@ const ProductDetail = () => {
   const handleAddToWishlist = async () => {
     const result = await addToWishlistContext(Number(id));
     if (result.success) {
-      alert('Added to wishlist!');
+      alert("Added to wishlist!");
     }
   };
 
   const handleSubmitReview = async (e) => {
     e.preventDefault();
     if (!user) {
-      alert('Please login to submit a review');
+      alert("Please login to submit a review");
       return;
     }
 
@@ -104,11 +113,11 @@ const ProductDetail = () => {
         comment,
         date: new Date().toISOString(),
       });
-      setComment('');
+      setComment("");
       setRating(5);
       loadProductData(); // Reload reviews
     } catch (error) {
-      console.error('Failed to submit review:', error);
+      console.error("Failed to submit review:", error);
     }
   };
 
@@ -131,13 +140,17 @@ const ProductDetail = () => {
 
           <div className="product-details">
             <h1>{product.name}</h1>
-            
+
             <div className="product-rating">
               <FiStar className="star-icon" />
-              <span>{product.rating} ({reviews.length} reviews)</span>
+              <span>
+                {product.rating} ({reviews.length} reviews)
+              </span>
             </div>
 
-            <div className="product-price-large">${product.price.toFixed(2)}</div>
+            <div className="product-price-large">
+              ${product.price.toFixed(2)}
+            </div>
 
             <p className="product-description">{product.description}</p>
 
@@ -169,7 +182,7 @@ const ProductDetail = () => {
                 <FiShoppingCart /> Add to Cart
               </button>
 
-              <button 
+              <button
                 className="btn-wishlist-large"
                 onClick={handleAddToWishlist}
               >
@@ -188,7 +201,10 @@ const ProductDetail = () => {
               <h3>Write a Review</h3>
               <div className="form-group">
                 <label>Rating</label>
-                <select value={rating} onChange={(e) => setRating(e.target.value)}>
+                <select
+                  value={rating}
+                  onChange={(e) => setRating(e.target.value)}
+                >
                   <option value="5">5 Stars</option>
                   <option value="4">4 Stars</option>
                   <option value="3">3 Stars</option>
@@ -205,13 +221,15 @@ const ProductDetail = () => {
                   required
                 />
               </div>
-              <button type="submit" className="btn-primary">Submit Review</button>
+              <button type="submit" className="btn-primary">
+                Submit Review
+              </button>
             </form>
           )}
 
           <div className="reviews-list">
             {reviews.length > 0 ? (
-              reviews.map(review => (
+              reviews.map((review) => (
                 <div key={review.id} className="review-item">
                   <div className="review-header">
                     <div className="review-info">
@@ -220,7 +238,9 @@ const ProductDetail = () => {
                         {[...Array(5)].map((_, i) => (
                           <FiStar
                             key={i}
-                            className={i < review.rating ? 'star-filled' : 'star-empty'}
+                            className={
+                              i < review.rating ? "star-filled" : "star-empty"
+                            }
                           />
                         ))}
                       </div>
@@ -233,7 +253,9 @@ const ProductDetail = () => {
                 </div>
               ))
             ) : (
-              <p className="no-reviews">No reviews yet. Be the first to review!</p>
+              <p className="no-reviews">
+                No reviews yet. Be the first to review!
+              </p>
             )}
           </div>
         </div>
