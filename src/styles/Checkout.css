@@ -17,6 +17,50 @@
   border-radius: 12px;
 }
 
+.checkout-form .form-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.checkout-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.checkout-form label .required {
+  color: var(--danger);
+  margin-left: 2px;
+}
+
+.checkout-form input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.checkout-form input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.checkout-form input.error {
+  border-color: var(--danger);
+  background-color: #FEF2F2;
+}
+
+.error-message {
+  display: block;
+  color: var(--danger);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -796,48 +796,7 @@
       "address": "456 User Avenue"
     }
   ],
-  "wishlist": [
-    {
-      "id": "2a47",
-      "userId": 1764674989332,
-      "productId": 1
-    },
-    {
-      "id": "5aa9",
-      "userId": 1764674989332,
-      "productId": 8
-    },
-    {
-      "id": "8437",
-      "userId": 1764674989332,
-      "productId": 2
-    },
-    {
-      "id": "9c21",
-      "userId": 1764674989332,
-      "productId": 13
-    },
-    {
-      "id": "7f45",
-      "userId": 1764674989332,
-      "productId": 22
-    },
-    {
-      "id": "3d88",
-      "userId": 1764674989332,
-      "productId": 18
-    },
-    {
-      "id": "6735",
-      "userId": "2",
-      "productId": "2"
-    },
-    {
-      "id": "635b",
-      "userId": "2",
-      "productId": 3
-    }
-  ],
+  "wishlist": [],
   "reviews": [
     {
       "id": "f029",
@@ -889,16 +848,6 @@
     }
   ],
   "cart": [
-    {
-      "id": "cart-2-1765560895419",
-      "userId": "2",
-      "items": [
-        {
-          "productId": "2",
-          "quantity": 19
-        }
-      ]
-    },
     {
       "id": "cart-2-1765560895420",
       "userId": "2",
@@ -1087,6 +1036,35 @@
         "address": "456 User Avenue",
         "city": "Thượng Phúc",
         "zipCode": "06000",
+        "phone": "0359538518"
+      }
+    },
+    {
+      "id": "3b4f",
+      "userId": "2",
+      "items": [
+        {
+          "productId": "47",
+          "quantity": 1
+        },
+        {
+          "productId": "48",
+          "quantity": 1
+        },
+        {
+          "productId": "10",
+          "quantity": 1
+        }
+      ],
+      "total": 45.97,
+      "status": "pending",
+      "date": "2025-12-15T07:55:05.976Z",
+      "shippingInfo": {
+        "name": "John Doe",
+        "email": "john@example.com",
+        "address": "456 User Avenue",
+        "city": "Thai Thuy",
+        "zipCode": "41000",
         "phone": "0359538518"
       }
     }

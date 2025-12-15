@@ -42,15 +42,14 @@ export const WishlistProvider = ({ children }) => {
   const addToWishlist = async (productId) => {
     if (!user) {
       alert('Please login to add items to wishlist');
-      return { success: false };
+      return { success: false, message: 'Please login to add items to wishlist' };
     }
 
     try {
       // Check if already in wishlist
       const exists = wishlistItems.find(item => item.productId == productId);
       if (exists) {
-        alert('Product already in wishlist');
-        return { success: false };
+        return { success: false, message: 'Product already in wishlist' };
       }
 
       const response = await apiAddToWishlist({
@@ -59,10 +58,10 @@ export const WishlistProvider = ({ children }) => {
       });
 
       setWishlistItems(prev => [...prev, response.data]);
-      return { success: true };
+      return { success: true, message: 'Added to wishlist successfully' };
     } catch (error) {
       console.error('Failed to add to wishlist:', error);
-      return { success: false };
+      return { success: false, message: 'Failed to add to wishlist' };
     }
   };
 

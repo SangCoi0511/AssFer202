@@ -9,13 +9,17 @@ import '../styles/Header.css';
 
 const Header = () => {
   const { user, logout, isAdmin } = useAuth();
-  const { getCartCount } = useCart();
+  const { getCartCount, cartItems } = useCart();
   const { updateFilters } = useShop();
-  const { getWishlistCount } = useWishlist();
+  const { getWishlistCount, wishlistItems } = useWishlist();
   const navigate = useNavigate();
   const location = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+
+  // Get current counts
+  const cartCount = getCartCount();
+  const wishlistCount = getWishlistCount();
 
   const handleLogout = () => {
     logout();
@@ -70,16 +74,16 @@ const Header = () => {
 
           {user ? (
             <>
-              <Link to="/wishlist" className="icon-btn">
+              <Link to="/wishlist" className="icon-btn wishlist-icon">
                 <FiHeart />
-                {getWishlistCount() > 0 && (
-                  <span className="cart-badge">{getWishlistCount()}</span>
+                {wishlistCount > 0 && (
+                  <span className="cart-badge">{wishlistCount}</span>
                 )}
               </Link>
-              <Link to="/cart" className="icon-btn cart-btn">
+              <Link to="/cart" className="icon-btn cart-icon">
                 <FiShoppingCart />
-                {getCartCount() > 0 && (
-                  <span className="cart-badge">{getCartCount()}</span>
+                {cartCount > 0 && (
+                  <span className="cart-badge">{cartCount}</span>
                 )}
               </Link>
               <div className="user-menu">

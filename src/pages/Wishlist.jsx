@@ -83,7 +83,7 @@ const Wishlist = () => {
 
   const handleRemove = async (productId) => {
     // Find wishlist entry
-    const entry = wishlistData.find((item) => item.productId === productId);
+    const entry = wishlistData.find((item) => item.productId == productId);
     if (entry) {
       await removeFromWishlist(entry.id);
     }
