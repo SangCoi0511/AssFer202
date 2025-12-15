@@ -94,6 +94,7 @@ const ProductDetail = () => {
     }
 
     addToCart(product, quantity);
+    openModal("Success", "Product added to cart successfully!");
   };
 
   const { addToWishlist: addToWishlistContext } = useWishlist();
