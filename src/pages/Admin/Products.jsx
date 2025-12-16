@@ -184,23 +184,9 @@ const ProductFormModal = ({ product, onSubmit, onClose }) => {
 
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
-  const { refreshProducts } = useShop();
-
-  useEffect(() => {
-    loadProducts();
-  }, []);
-
-  const loadProducts = async () => {
-    try {
-      const response = await getProducts();
-      setProducts(response.data);
-    } catch (error) {
-      console.error('Failed to load products:', error);
-    }
-  };
+  const { products, refreshProducts } = useShop();
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -227,10 +213,9 @@ const Products = () => {
       }
       
       handleCloseModal(); 
-      loadProducts();
       
-      // Refresh products in ShopContext so Shop page updates
-      refreshProducts();
+      // Refresh products in ShopContext so all pages update
+      await refreshProducts();
       
     } catch (error) {
       console.error('Failed to save product:', error);
@@ -242,10 +227,9 @@ const Products = () => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       try {
         await deleteProduct(id);
-        loadProducts();
         
-        // Refresh products in ShopContext so Shop page updates
-        refreshProducts();
+        // Refresh products in ShopContext so all pages update
+        await refreshProducts();
       } catch (error) {
         console.error('Failed to delete product:', error);
       }

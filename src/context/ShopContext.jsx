@@ -15,10 +15,11 @@ export const ShopProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [maxPrice, setMaxPrice] = useState(10000);
 
   const [filters, setFilters] = useState({
     categoryId: null,
-    priceRange: [0, 1000],
+    priceRange: [0, 10000],
     minRating: 0,
     searchQuery: '',
     sortBy: 'default',
@@ -36,8 +37,22 @@ export const ShopProvider = ({ children }) => {
         getCategories(),
       ]);
 
-      setProducts(productsRes.data);
+      const loadedProducts = productsRes.data;
+      setProducts(loadedProducts);
       setCategories(categoriesRes.data);
+
+      // Tính giá cao nhất từ products
+      if (loadedProducts.length > 0) {
+        const highestPrice = Math.max(...loadedProducts.map(p => p.price));
+        const roundedMaxPrice = Math.ceil(highestPrice / 100) * 100; // Làm tròn lên 100
+        setMaxPrice(roundedMaxPrice);
+        
+        // Cập nhật filter range nếu cần
+        setFilters(prev => ({
+          ...prev,
+          priceRange: [prev.priceRange[0], roundedMaxPrice]
+        }));
+      }
     } catch (error) {
       console.error('Failed to load shop data:', error);
     } finally {
@@ -102,7 +117,7 @@ export const ShopProvider = ({ children }) => {
   const resetFilters = () => {
     setFilters({
       categoryId: null,
-      priceRange: [0, 1000],
+      priceRange: [0, maxPrice],
       minRating: 0,
       searchQuery: '',
       sortBy: 'default',
@@ -124,6 +139,7 @@ export const ShopProvider = ({ children }) => {
     categories,
     loading,
     filters,
+    maxPrice,
     updateFilters,
     resetFilters,
     getFilteredProducts,

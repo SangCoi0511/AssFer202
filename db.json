@@ -26,7 +26,7 @@
       "slug": "toys"
     }
   ],
-  "products": [
+    "products": [
     {
       "name": "iPhone 13 Pro max",
       "price": 1099.99,
@@ -284,7 +284,7 @@
       "categoryId": 1,
       "stock": 83,
       "rating": 4.1,
-      "image": "https://cdn.dummyjson.com/product-images/laptops/macbook-pro/thumbnail.webp",
+      "image": "https://traidepbaniphone.com/thumbs/760x540x2/upload/product/apple-macbook-pro-13-inch-m2-2022-2-1-650x650-6056.jpg",
       "description": "MacBook Pro 2021 with mini-LED display may launch between September, November"
     },
     {
@@ -294,7 +294,7 @@
       "categoryId": 1,
       "stock": 50,
       "rating": 4.25,
-      "image": "https://cdn.dummyjson.com/product-images/laptops/samsung-galaxy-book/thumbnail.webp",
+      "image": "https://laptopphuocdat.com/wp-content/uploads/2024/07/Samsung-galaxy-book-4-1-450x450.png",
       "description": "Samsung Galaxy Book S (2020) Laptop With Intel Lakefield Chip, 8GB of RAM Launched"
     },
     {
@@ -304,7 +304,7 @@
       "categoryId": 1,
       "stock": 68,
       "rating": 4.43,
-      "image": "https://cdn.dummyjson.com/product-images/laptops/microsoft-surface-laptop-4/thumbnail.webp",
+      "image": "https://ttcenter.com.vn/uploads/photos/1720665566_3020_b56727246d15b658b501c7c7371ffd6a.jpg",
       "description": "Style and speed. Stand out on HD video calls backed by Studio Mics. Capture ideas on the vibrant touchscreen."
     },
     {
@@ -314,7 +314,7 @@
       "categoryId": 1,
       "stock": 96,
       "rating": 4.54,
-      "image": "https://cdn.dummyjson.com/product-images/laptops/infinix-inbook/thumbnail.webp",
+      "image": "https://global.pro.infinixmobility.com/media/wysiwyg/inbook_inbookx2_base1.png",
       "description": "Infinix Inbook X1 Ci3 10th 8GB 256GB 14 Win10 Grey – 1 Year Warranty"
     },
     {
@@ -324,7 +324,7 @@
       "categoryId": 1,
       "stock": 89,
       "rating": 4.43,
-      "image": "https://cdn.dummyjson.com/product-images/laptops/hp-pavilion-15-dk1056wm/thumbnail.webp",
+      "image": "https://m.media-amazon.com/images/I/71TmJKXhl+L._AC_UF1000,1000_QL80_.jpg",
       "description": "HP Pavilion 15-DK1056WM Gaming Laptop 10th Gen Core i5, 8GB, 256GB SSD, GTX 1650 4GB, Windows 10"
     },
     {
@@ -796,7 +796,18 @@
       "address": "456 User Avenue"
     }
   ],
-  "wishlist": [],
+  "wishlist": [
+    {
+      "id": "9724",
+      "userId": "2",
+      "productId": "6"
+    },
+    {
+      "id": "169c",
+      "userId": "2",
+      "productId": "8"
+    }
+  ],
   "reviews": [
     {
       "id": "f029",
@@ -849,11 +860,33 @@
   ],
   "cart": [
     {
-      "id": "cart-2-1765560895420",
+      "id": "cart-2-1765856206376",
       "userId": "2",
       "items": [
         {
-          "productId": "2",
+          "productId": "4",
+          "quantity": 1
+        },
+        {
+          "productId": "10",
+          "quantity": 1
+        },
+        {
+          "productId": "12",
+          "quantity": 1
+        },
+        {
+          "productId": "58",
+          "quantity": 4
+        }
+      ]
+    },
+    {
+      "id": "cart-2-1765856206378",
+      "userId": "2",
+      "items": [
+        {
+          "productId": "4",
           "quantity": 1
         }
       ]
@@ -1000,7 +1033,7 @@
         }
       ],
       "total": 499.99,
-      "status": "pending",
+      "status": "shipped",
       "date": "2025-12-10T07:10:33.550Z",
       "shippingInfo": {
         "name": "John Doe",
@@ -1028,7 +1061,7 @@
         }
       ],
       "total": 499.99,
-      "status": "pending",
+      "status": "delivered",
       "date": "2025-12-10T07:12:11.275Z",
       "shippingInfo": {
         "name": "John Doe",
